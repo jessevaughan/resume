@@ -1,0 +1,16 @@
+# Force HTTPS on resume.jessevaughan.com.
+#
+# Lives in public/ so Vite copies it into dist/ at build — that way it ships
+# with every deploy and survives the rsync --delete step (a .htaccess placed
+# on the server by hand would get wiped on the next deploy).
+#
+# IMPORTANT: only effective once the Let's Encrypt cert is active. If this
+# reaches the server before the cert exists, HTTP visitors get 301'd to a
+# broken TLS endpoint and the site is unreachable. Deploy after the cert is live.
+
+RewriteEngine On
+
+# Leave ACME challenges on plain HTTP so cert auto-renewal can't be blocked.
+RewriteCond %{REQUEST_URI} !^/\.well-known/
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]

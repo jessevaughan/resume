@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Preload the above-the-fold faces (body + display name) so they're
+         ready before first paint and font-display: swap barely flashes.
+         crossorigin is required: fonts are always fetched in CORS mode. -->
+    <link
+      rel="preload"
+      href="/fonts/Archivo-Thin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/SerrifCompressed-Light.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <title>Jesse Vaughan — Resume</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

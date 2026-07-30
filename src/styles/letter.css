@@ -1,0 +1,41 @@
+/* ---- cover letter ----
+   Shares the resume's masthead, fonts, and color tokens; only the body
+   measure and rhythm differ. Ported from the letter template's <head>
+   overrides, with the values pulled into tokens like everything else. */
+
+:root {
+  --letter-measure: 6.2in; /* body line length */
+  --fs-letter: 10pt;
+  --lh-letter: 1.55;
+  --fs-signoff: 15pt;
+
+  --gap-letter-para: 11pt; /* between body paragraphs */
+  --gap-letter-meta: 20pt; /* below the date/company line */
+  --gap-signoff: 20pt; /* above the signature */
+}
+
+.letter {
+  max-width: var(--letter-measure);
+  font-size: var(--fs-letter);
+  line-height: var(--lh-letter);
+}
+
+.letter p {
+  margin-bottom: var(--gap-letter-para);
+}
+
+.letter-meta {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin-bottom: var(--gap-letter-meta);
+}
+
+.signoff {
+  margin-top: var(--gap-signoff);
+  margin-bottom: 0;
+}
+
+.signoff .name-line {
+  font-family: var(--playful);
+  font-size: var(--fs-signoff);
+}

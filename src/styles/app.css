@@ -1,0 +1,45 @@
+/* App chrome — not part of the resume itself. Screen-only, hidden in
+   print so it never lands in the PDF or affects page geometry. */
+
+.track-switcher {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-sans);
+}
+
+.track-switcher button {
+  font: inherit;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.track-switcher button:hover {
+  color: var(--ink);
+  background: #f2f1ee;
+}
+
+.track-switcher button[aria-pressed="true"] {
+  color: #fff;
+  background: var(--accent);
+}
+
+@media print {
+  .track-switcher {
+    display: none;
+  }
+}

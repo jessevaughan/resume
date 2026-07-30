@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Jesse Vaughan — Design Engineer · Web Architect</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Track B one-page overrides — shared styles.css stays the family baseline */
+      :root {
+        --sidebar-w: 1.7in;
+        --lh-body: 1.34;
+        --lh-list: 1.25;
+        --page-pad: 0.2in 0.45in 0.25in;
+      }
+      section {
+        margin-bottom: 12pt;
+      }
+      .job {
+        margin-bottom: 9pt;
+      }
+      .masthead {
+        padding-bottom: 10pt;
+      }
+      .main li {
+        margin-bottom: 4pt;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+  THIS FILE IS THE TRACK B SOURCE OF TRUTH. Edit here; the PDF is an export.
+
+  Structure rules:
+  - DOM order = PDF text extraction order. Main column comes first in the
+    markup so parsers read: header > summary > highlights > experience >
+    skills > education. The sidebar is placed visually left via CSS grid.
+    Keep it that way.
+  - Hyphen in title separators ("Head of Creative - Marketing");
+    en dash in all date ranges.
+  - One page. Same header band + rail/main layout family as Track A
+    (index.html); per-track spacing lives in the style block in <head>.
+  - After every export: run `pdftotext resume.pdf -` and skim it.
+
+  Load-bearing copy guardrails (do not drift):
+  - Track B leads with 15+ years building and owning web. Creative
+    leadership is CONTEXT here, not the lead (inverse of Track A). It lives
+    in the summary's last sentence and the final Head of Creative bullet
+    only; don't let edits promote it.
+  - DareToGrow and its metrics never appear on Track B. "Zero
+    brand-confusion tickets" is a brand-ops metric and lives on Track A only.
+  - Incident: canonical term is "traffic surge and DDoS," never "bot
+    attack." Division of labor is fixed: Jesse led response and scaled
+    servers; devops blocked the IP ranges; the Fastly blocklist is Jesse's
+    durable fix, built with devops. Never claim blocking IPs as Jesse's own action.
+  - Cost stat is owned: cut 80%, to $3,600/year. It dates to the 2016
+    rebuild (per the AdRoll 1.0 case study), so it lives in the Career
+    Highlights migration bullet, never in current-role bullets.
+  - "Rebuilt" the Smartling integration, not "built": inherited a
+    Drupal-era setup per the case study. Ten locales, never "7 regions."
+  - The 2021 DigitalOcean/Forge migration was led by Jesse's
+    designer/developer with Jesse overseeing. Don't claim leading it.
+  - React / Next.js is always "working knowledge," never stronger.
+    Statamic / Laravel stays named here (Track A goes generic by choice).
+  - Astro: verified, jessevaughan.com portfolio build. Interview answer
+    if asked: the portfolio site.
+  - Functional title note reads "is," not a colon, on every surface.
+-->
+
+    <header class="masthead">
+      <img class="avatar" src="avatar.svg" alt="" />
+      <div class="masthead-row">
+        <h1 class="name">Jesse Vaughan</h1>
+        <p class="role">Design Engineer · Web Architect</p>
+      </div>
+      <p class="contact">
+        jessevaughan.com&ensp;/&ensp;hello@jessevaughan.com&ensp;/&ensp;410-707-4274&ensp;/&ensp;Joshua
+        Tree, CA
+      </p>
+    </header>
+
+    <div class="page-grid">
+      <main class="main">
+        <section>
+          <h2>Summary</h2>
+          <p class="intro">
+            Design engineer and web architect with 15+ years building and owning
+            production web properties end to end: frontend, CMS architecture and
+            migration, localization, and the infrastructure behind them. Rebuilt
+            three companies' sites from the ground up and owned AdRoll's for a
+            decade. I also led brand and creative for the same global SaaS org,
+            so I bring design sensibility most engineers don't, and move easily
+            between writing the code, setting technical direction, and defending
+            it to non-technical partners.
+          </p>
+        </section>
+
+        <section>
+          <h2>Career Highlights</h2>
+          <ul>
+            <li>
+              Rebuilt three companies' websites from the ground up: Selectica on
+              ExpressionEngine (2013), OneLogin on Statamic (2014), and AdRoll
+              on Statamic (2016). At AdRoll, extended front-end ownership into a
+              decade of full-stack and infrastructure ownership.
+            </li>
+            <li>
+              Migrated AdRoll from Drupal/Pantheon to a flat-file Statamic build
+              (2015–16): owned the content model, the editorial system that let
+              non-engineers ship site edits without dev tickets, and
+              localization across ten locales via Smartling; cut hosting and
+              deployment costs 80%, to $3,600 a year.
+            </li>
+            <li>
+              Owned the full production web stack: Fastly, Cloudflare,
+              DigitalOcean, and Laravel Forge, including provisioning, scaling,
+              CI/CD via GitHub Actions, and incident response during a Super
+              Bowl traffic surge and DDoS.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Experience</h2>
+
+          <article class="job">
+            <h3 class="job-title">
+              Head of Creative - Marketing
+              <span class="job-meta"
+                >AdRoll (NextRoll)&ensp;·&ensp;2022–Present</span
+              >
+            </h3>
+            <p class="job-lede">
+              Own and architect the web platform for a global SaaS marketing
+              org, and lead the brand and creative behind it.
+            </p>
+            <ul class="job-list">
+              <li>
+                Own the architecture and ongoing development of adroll.com: a
+                flat-file Statamic build with page templates, reusable modules,
+                and an editorial system that lets marketing ship edits without
+                engineering.
+              </li>
+              <li>
+                Led the site migration behind the 2025 AdRoll–RollWorks brand
+                consolidation: +87% first-time visitors and +42% homepage
+                traffic in the first 60 days.
+              </li>
+              <li>
+                Run the full production stack end to end, including
+                provisioning, scaling, server-upgrade decisions, and CI/CD via
+                GitHub Actions.
+              </li>
+              <li>
+                Led incident response during a Super Bowl traffic surge and
+                DDoS: scaled servers to absorb the load while devops blocked
+                attacking IP ranges, then built a standing bot blocklist into
+                Fastly with devops so the next one wouldn't need a scramble.
+              </li>
+              <li>
+                Build and integrate creative tooling, including migrating a ROAS
+                calculator from an isolated Gatsby build into the main site
+                codebase.
+              </li>
+              <li>
+                Lead brand and creative for the marketing org and a team of up
+                to seven; that design sensibility is what the web work runs on.
+              </li>
+            </ul>
+            <p class="job-note">
+              Functional title. Title of record is Senior Manager, Creative.
+            </p>
+          </article>
+
+          <article class="job">
+            <h3 class="job-title">
+              Manager II, Creative - Marketing
+              <span class="job-meta"
+                >AdRoll (NextRoll)&ensp;·&ensp;2020–2022</span
+              >
+            </h3>
+            <ul class="job-list">
+              <li>
+                Maintained and evolved the core Statamic build and web design
+                system, and set the front-end standard for the team, while
+                directing creative.
+              </li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <h3 class="job-title">
+              Manager, Creative - Marketing
+              <span class="job-meta"
+                >AdRoll (NextRoll)&ensp;·&ensp;2018–2020</span
+              >
+            </h3>
+            <ul class="job-list">
+              <li>
+                Took over the full creative team as hiring manager while
+                continuing to own the web build, mentoring a designer/developer
+                through technical projects and review.
+              </li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <h3 class="job-title">
+              Team Lead, Web Design - Marketing
+              <span class="job-meta"
+                >AdRoll (NextRoll)&ensp;·&ensp;2017–2018</span
+              >
+            </h3>
+            <!-- Title-only on Track B by design; Track A carries the one-liner. -->
+          </article>
+
+          <article class="job">
+            <h3 class="job-title">
+              Earlier - Web Developer &amp; Designer
+              <span class="job-meta"
+                >AdRoll · OneLogin · Selectica · Visual Data
+                Systems&ensp;·&ensp;2009–2017</span
+              >
+            </h3>
+            <ul class="job-list">
+              <li>
+                Rebuilt the OneLogin (Statamic, 2014) and Selectica
+                (ExpressionEngine, 2013) marketing sites front to back; started
+                at agency Visual Data Systems building responsive sites and web
+                apps.
+              </li>
+              <li>
+                Joined AdRoll in 2014, led the Drupal-to-Statamic migration, and
+                rebuilt the Smartling localization integration on Statamic
+                across ten locales.
+              </li>
+            </ul>
+          </article>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <section>
+          <h2>Core Skills</h2>
+
+          <div class="skill-group">
+            <h3>Web Architecture &amp; Development</h3>
+            <p>
+              HTML / Sass / JavaScript · Statamic / Laravel · Astro · CMS
+              architecture and migration (content modeling, editorial systems) ·
+              component &amp; design systems · React / Next.js (working
+              knowledge)
+            </p>
+          </div>
+
+          <div class="skill-group">
+            <h3>Infrastructure &amp; Ops</h3>
+            <p>
+              Fastly · Cloudflare · DigitalOcean · Laravel Forge · DNS · CI/CD
+              (GitHub Actions) · Core Web Vitals · incident response
+            </p>
+          </div>
+
+          <div class="skill-group">
+            <h3>Localization &amp; Martech</h3>
+            <p>
+              Smartling (multi-region, ten locales) · HubSpot (HubL, CLI) · GA4
+              (Google Analytics 4) / GTM (Google Tag Manager)
+            </p>
+          </div>
+
+          <div class="skill-group">
+            <h3>Design &amp; Creative</h3>
+            <p>
+              brand &amp; creative direction · design systems · Figma · Adobe
+              Creative Suite · creative team leadership
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2>Education</h2>
+          <div class="skill-group">
+            <h3>B.A., Visual &amp; Performing Arts</h3>
+            <p>Graphic Design &amp; Photography</p>
+            <p>University of Maryland, Baltimore County</p>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </body>
+</html>
