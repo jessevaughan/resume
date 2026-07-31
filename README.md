@@ -6,7 +6,8 @@ React + TypeScript. Each track is a linkable, printable URL, and one command
 renders both to US Letter PDFs.
 
 The hand-built HTML/CSS this grew out of lives in [`reference/`](reference/)
-as the "before" snapshot; the git history runs from that through this app.
+as the "before" snapshot; ~~the git history runs from that through this app.~~
+History got messy so I did a re-init; snapshot is still accurate.
 
 Adapting it for your own resume? See [TEMPLATE.md](TEMPLATE.md).
 
