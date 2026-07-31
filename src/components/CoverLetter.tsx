@@ -22,11 +22,15 @@ export function CoverLetter({
     document.title = `${name} — Cover Letter`
     // The PDF script reads this to name the export per company.
     document.body.dataset.company = letter.company
+    // Scopes the letter-only masthead variant (see letter.css). Same mechanism
+    // as data-track, so the resume's header styles are left untouched.
+    document.body.dataset.doc = 'letter'
     // Letters use the baseline tokens, as the original template did, so clear
     // any per-track spacing left on <body> by the resume view.
     delete document.body.dataset.track
     return () => {
       delete document.body.dataset.company
+      delete document.body.dataset.doc
     }
   }, [name, letter.company])
 

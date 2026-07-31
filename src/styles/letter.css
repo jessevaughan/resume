@@ -39,3 +39,37 @@
   font-family: var(--playful);
   font-size: var(--fs-signoff);
 }
+
+/* ---- letter masthead variant ----
+   The resume wordmark is sized to balance three columns of content. Over a
+   ~200 word letter it outweighs the message, so the letterhead is retuned to
+   sit quietly above the body instead of on top of it.
+
+   Scoped to body[data-doc="letter"] (set in CoverLetter.tsx), so the resume's
+   header styles are untouched and its output is unchanged. Typeface, contact
+   line, margins, and color are all inherited: only scale changes, so the two
+   documents still read as a matched pair. */
+
+body[data-doc="letter"] {
+  /* ~42% of the resume's 38pt. Deliberately well under the signature below:
+     at 21pt the two name treatments still read as peers, which is the thing
+     the letterhead shouldn't do. */
+  --fs-name: 16pt;
+  --fs-role: 8.5pt; /* sits with the contact line, so name + role + contact
+                       read as one compact letterhead block */
+  --gap-name-role: 6pt;
+
+  /* The signature is the primary name moment on the page: 1.5x the letterhead,
+     so the hierarchy is unambiguous rather than a near-tie. */
+  --fs-signoff: 24pt;
+}
+
+/* Illustration dropped from the letter. It's absolutely positioned top-right
+   to balance the resume's three-column masthead; against a short letter it has
+   nothing to balance, so it strands in the corner with a void between it and
+   the smaller wordmark. It's also the highest-contrast element on a sparse
+   page, pulling the eye to the corner instead of the opening line. Scaling it
+   fixed the weight but not the isolation, so the letterhead is type only. */
+body[data-doc="letter"] .avatar {
+  display: none;
+}
