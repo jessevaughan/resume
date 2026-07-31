@@ -19,21 +19,21 @@ export const resume: ResumeData = {
     // creative
     `Sixteen years across brand, web, and campaigns, the last 9+ in creative leadership roles for a global SaaS marketing org. I've built and led distributed teams, directed three company-wide brand transformations, and ran campaigns through the company's strongest growth periods. That work runs on a design and development background I still use daily, from the martech stack to the website itself.`,
     // engineering
-    `Design engineer and web architect with sixteen years building and owning production web properties end to end: frontend, CMS architecture and migration, localization, and the infrastructure behind them. I rebuilt three companies' sites from the ground up and owned AdRoll's for twelve years. I also led creative for the same global SaaS org, so I bring design sensibility most engineers don't, and move easily between writing the code, setting technical direction, and defending it to non-technical partners.`,
+    `Design engineer and web architect with sixteen years building and owning production web properties end to end, across frontend, CMS architecture and migration, localization, and the infrastructure behind them. I owned AdRoll's site for twelve years. I also led creative for the same global SaaS org, so I move easily between writing the code, setting technical direction, and defending it to non-technical partners.`,
   ),
 
   highlights: perTrack(
     // creative
     [
       `Directed three company-wide brand transformations, including a full 2018 rebrand developed directly with the CEO and C-suite, a 2019 refresh and website rebuild, and the 2025 consolidation of two brands into one. Defined the visual and messaging systems used across all of marketing.`,
-      `Led creative direction on #DareToGrow, AdRoll's largest brand campaign: 15 documentary-style customer videos across a global omnichannel program, which ran during a period when the company saw +65% account signups and +95% site traffic.`,
+      `Led creative direction on #DareToGrow, AdRoll's largest brand campaign, with 15 documentary-style customer videos across a global omnichannel program. It ran during a period when the company saw +65% account signups and +95% site traffic.`,
       `Promoted from web designer to Head of Creative across twelve years at AdRoll, and stayed hands-on in the web platform I architected and owned.`,
     ],
     // engineering
     [
       `Rebuilt three companies' websites from the ground up: Selectica on ExpressionEngine (2013), OneLogin on Statamic (2014), and AdRoll on Statamic (2015–16). At AdRoll, extended front-end ownership into twelve years of running the full stack and infrastructure.`,
-      `Migrated AdRoll from Drupal/Pantheon to a flat-file Statamic build (2015–16): owned the content model, the editorial system that let non-engineers ship site edits without dev tickets, and localization across ten locales in seven regions via Smartling; cut hosting and deployment costs 80%, to $3,600 a year.`,
-      `Owned the full production web stack: Fastly, Cloudflare, DigitalOcean, and Laravel Forge, including provisioning, scaling, and CI/CD via GitHub Actions.`,
+      `Migrated AdRoll from Drupal/Pantheon to a flat-file Statamic build in 2015–16. Owned the content model, the editorial system that let non-engineers ship site edits without dev tickets, and localization across ten locales in seven regions via Smartling. Cut hosting and deployment costs 80%, to $3,600 a year.`,
+      `Owned the full production web stack, from Fastly, Cloudflare, DigitalOcean, and Laravel Forge through provisioning, scaling, server-upgrade decisions, and CI/CD via GitHub Actions.`,
     ],
   ),
 
@@ -56,21 +56,20 @@ export const resume: ResumeData = {
       bullets: perTrack(
         // creative
         [
-          `Directed the 2025 consolidation of AdRoll and RollWorks into a single brand: identity, messaging systems, and a full site migration. First 60 days: +87% first-time visitors, +42% homepage traffic, zero brand-confusion tickets.`,
+          `Directed the 2025 consolidation of AdRoll and RollWorks into a single brand, from identity and messaging systems through a full site migration. In the first 60 days, +87% first-time visitors, +42% homepage traffic, zero brand-confusion tickets.`,
           `Built and led a distributed creative team of up to seven across the US, spanning design, web, video, and copy.`,
-          `Shaped brand strategy in partnership with the CMO, VP of Marketing, and brand leadership; set company-wide brand direction with the executive team.`,
+          `Set creative and brand strategy with the CMO, VP of Marketing, and brand leadership. Shaped company-wide direction with the executive team.`,
           `Owned web platform performance and reliability, resolving a live DDoS attack on production.`,
-          `Built an AI-assisted workflow with Claude Code that turns templated site sections into CMS-editable entries, retiring a standing queue of copy/paste tickets so marketing edits its own pages.`,
-          `Founding board member of RollAsia (2018–2026), the company's Asian and Pacific Islander employee resource group; built and hosted company-wide programming and speaker events.`,
+          `Built an AI-assisted workflow with Claude Code to turn templated site sections into CMS-editable entries. It retired a standing queue of copy/paste tickets and moved routine edits to self-serve.`,
+          `Founding board member of RollAsia (2018–2026), the company's Asian and Pacific Islander employee resource group. Built and hosted company-wide programming and speaker events.`,
         ],
         // engineering
         [
-          `Owned the architecture and ongoing development of adroll.com: a flat-file Statamic build with page templates, reusable modules, and an editorial system that let marketing ship edits without engineering.`,
-          `Built an AI-assisted workflow with Claude Code that converts hardcoded template sections into CMS-editable entries, retiring a standing queue of copy/paste tickets and moving routine content edits to self-serve.`,
-          `Led the site migration behind the 2025 AdRoll–RollWorks brand consolidation: +87% first-time visitors and +42% homepage traffic in the first 60 days.`,
-          `Ran the full production stack end to end, including provisioning, scaling, server-upgrade decisions, and CI/CD via GitHub Actions.`,
-          `Led incident response during a Super Bowl traffic surge and DDoS: scaled servers to absorb the load while devops blocked attacking IP ranges, then built a standing bot blocklist into Fastly with devops so the next one wouldn't need a scramble.`,
-          `Led creative for the marketing org and a team of up to seven; that design sensibility is what the web work runs on.`,
+          `Owned the architecture and ongoing development of adroll.com, a flat-file Statamic build with page templates, reusable modules, and an editorial system that let marketing ship edits without engineering.`,
+          `Built an AI-assisted workflow with Claude Code to convert hardcoded template sections into CMS-editable entries. It retired a standing queue of copy/paste tickets and moved routine content edits to self-serve.`,
+          `Led the site migration behind the 2025 AdRoll–RollWorks brand consolidation. First-time visitors rose 87% and homepage traffic 42% in the first 60 days.`,
+          `Led incident response during a Super Bowl traffic surge and DDoS attack, scaling servers to absorb the load while devops blocked the attacking IP ranges. Then built a standing bot blocklist into Fastly with devops so the next one ran without a scramble.`,
+          `Led creative for the marketing org and a team of up to seven.`,
         ],
       ),
     },
@@ -81,7 +80,7 @@ export const resume: ResumeData = {
       bullets: perTrack(
         // creative
         [
-          `Directed creative across integrated brand and acquisition campaigns at high production velocity.`,
+          `Directed creative across integrated brand and acquisition campaigns.`,
           `Built brand systems that held up as the company grew. Strengthened the creative-review culture, unifying brand expression across product marketing and web.`,
         ],
         // engineering
@@ -97,12 +96,12 @@ export const resume: ResumeData = {
       bullets: perTrack(
         // creative
         [
-          `Took over the full creative team after the head of creative departed, becoming hiring manager and leading direction across brand, web, video, and design.`,
+          `Took over the full creative team after the head of creative departed, becoming hiring manager and leading direction across design, web, and video.`,
           `Hired and mentored across design and web, coaching a designer/developer who has since built a UI/UX career.`,
         ],
         // engineering
         [
-          `Took over the full creative team as hiring manager while continuing to own the web build, mentoring a designer/developer through technical projects and review who has since built a career in UI/UX design.`,
+          `Took over the full creative team as hiring manager while continuing to own the web build. Mentored a designer/developer through technical projects and review, and they have since built a career in UI/UX design.`,
         ],
       ),
     },
@@ -140,13 +139,13 @@ export const resume: ResumeData = {
     {
       title: "Web Developer & Designer - Marketing",
       company: "Selectica",
-      dates: "2013",
+      dates: "Mar–Dec 2013",
       bullets: perTrack([], []),
     },
     {
       title: "Senior Web Designer & Developer",
       company: "Visual Data Systems",
-      dates: "2009–2013",
+      dates: "2009–Feb 2013",
       bullets: perTrack([], []),
     },
   ],
@@ -158,15 +157,31 @@ export const resume: ResumeData = {
       [
         {
           heading: "Brand & Creative Strategy",
-          items: ["brand evolution", "creative direction", "brand systems", "messaging"],
+          items: [
+            "brand evolution",
+            "creative direction",
+            "brand systems",
+            "messaging",
+          ],
         },
         {
           heading: "Creative Leadership",
-          items: ["team building", "mentorship", "creative operations", "player-coach"],
+          items: [
+            "team building",
+            "mentorship",
+            "creative operations",
+            "player-coach",
+          ],
         },
         {
           heading: "Campaign Direction",
-          items: ["integrated", "digital & web", "video", "experiential", "visual storytelling"],
+          items: [
+            "integrated",
+            "digital & web",
+            "video",
+            "experiential",
+            "visual storytelling",
+          ],
         },
         {
           heading: "Technical Fluency",
@@ -216,7 +231,7 @@ export const resume: ResumeData = {
         {
           heading: "Localization & Martech",
           items: [
-            "Smartling (7 regions, 10 locales)",
+            "Smartling (10 locales, 7 regions)",
             "HubSpot (HubL, CLI)",
             "GA4 (Google Analytics 4) / GTM (Google Tag Manager)",
           ],
