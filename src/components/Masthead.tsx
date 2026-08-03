@@ -63,7 +63,7 @@ export function Masthead({
 
   return (
     <header className="masthead">
-      <img className="avatar" src="/avatar-stamped-tl.svg" alt="" />
+      <img className="avatar" src="/avatar-plated.png" alt="" />
       <div className="masthead-row">
         <h1 className="name">{name}</h1>
         <p className="role">{role}</p>
