@@ -5,10 +5,17 @@ import { Resume } from "./components/Resume";
 import { CoverLetter } from "./components/CoverLetter";
 import { Toolbar } from "./components/Toolbar";
 import { useTrack } from "./useTrack";
+import { useDocumentMeta } from "./useDocumentMeta";
 
 function App() {
   const [track, setTrack] = useTrack();
   const resolved = resolveResume(resume, track);
+
+  useDocumentMeta({
+    track,
+    documentTitle: resolved.documentTitle,
+    summary: resolved.summary,
+  });
 
   // ?letter=headway renders a cover letter instead of the resume. Letters are
   // local-only: the production build ships an empty registry, so an unknown
