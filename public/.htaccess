@@ -15,6 +15,17 @@ RewriteCond %{REQUEST_URI} !^/\.well-known/
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
+# Prerendered tracks. Extensionless on purpose: /engineering, not
+# /engineering/ and not /engineering.html. Serving the file through a rewrite
+# keeps the clean URL without Apache adding the trailing slash it would for a
+# directory. Guarded by -f so a plain `npm run build` deploy falls through to
+# the SPA rule below instead of 404ing.
+RewriteCond %{DOCUMENT_ROOT}/engineering.html -f
+RewriteRule ^engineering/?$ /engineering.html [L]
+
+RewriteCond %{DOCUMENT_ROOT}/creative.html -f
+RewriteRule ^creative/?$ /creative.html [L]
+
 # ── Track routes ───────────────────────────────────────────────────────
 # Each track is a path (see src/tracks.ts). The app resolves the track from
 # the path client-side, so both routes serve the same SPA shell.
