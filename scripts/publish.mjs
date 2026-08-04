@@ -20,7 +20,8 @@ import {
   rm,
 } from "node:fs/promises";
 import { createServer } from "node:http";
-import { extname } from "node:path";
+import { join, resolve, extname } from "node:path";
+import { fileURLToPath } from "node:url";
 import puppeteer from "puppeteer";
 
 const root = resolve(fileURLToPath(new URL(".", import.meta.url)), "..");
