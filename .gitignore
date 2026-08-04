@@ -27,6 +27,7 @@ pnpm-debug.log*
 # Licensed fonts and per-application cover letters stay out of the repo
 /public/fonts/*.woff
 /public/fonts/*.woff2
-/fonts/*.woff
-/fonts/*.woff2
+!/public/fonts/Archivo-*.woff2
 /cover-letters/*
+
+public/fonts/.DS_Store

@@ -10,13 +10,14 @@
 //
 // Run `npm run ship`, which sequences the whole thing correctly.
 
-import { mkdir, stat, copyFile } from "node:fs/promises";
+import { mkdir, stat, copyFile, readdir, readFile, rm } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL(".", import.meta.url)), "..");
 const distDir = join(root, "dist");
 const pdfDir = join(root, "pdfs");
+const lettersDir = join(root, "src", "data", "letters");
 
 // ── Config: keep in sync with src/tracks.ts and scripts/pdf.mjs ────────
 // These filenames must match pdfHref() in src/tracks.ts, or the download
@@ -57,9 +58,83 @@ async function copyPdfs() {
   return ok;
 }
 
+// Finder writes .DS_Store into any directory you open, including public/,
+// and Vite copies public/ into dist/ wholesale — it has no filter for that.
+// CI never hits this (Linux, fresh checkout, gitignored), so without this a
+// local deploy and a CI deploy would produce different dist/ contents.
+async function stripJunk() {
+  const entries = await readdir(distDir, { recursive: true });
+  const junk = entries.filter((e) => e.endsWith(".DS_Store"));
+  for (const file of junk) {
+    await rm(join(distDir, file), { force: true });
+    console.log(`  ✓ removed ${file}`);
+  }
+  return junk.length;
+}
+
+// ── Cover-letter guard ─────────────────────────────────────────────────
+// Letters are per-application and must never reach the public site. Three
+// things already stand between them and dist/: vite.config.ts aliases the
+// registry to letters.empty.ts unless INCLUDE_LETTERS=1, `npm run ship`
+// rebuilds without it, and copyPdfs() above is an allowlist. This checks the
+// output rather than trusting any of them, because all three are things a
+// future edit can quietly undo.
+//
+// On CI none of this can trigger: src/data/letters/ is gitignored, so the
+// checkout has no letters and import.meta.glob resolves to nothing. This
+// exists for deploys from a laptop that does have them.
+async function assertNoLetters() {
+  console.log("\nChecking no cover letter reached dist:");
+  const problems = [];
+
+  // 1. Nothing in dist/pdfs/ outside the allowlist.
+  const shipped = await readdir(join(distDir, "pdfs"));
+  for (const file of shipped) {
+    if (!PDFS.includes(file))
+      problems.push(`dist/pdfs/${file} is not a track PDF`);
+  }
+
+  // 2. No letter slug in the JS bundle. Vite inlines the glob's module paths,
+  //    so a bundled letter leaves its slug in the output as a literal.
+  let slugs = [];
+  try {
+    slugs = (await readdir(lettersDir))
+      .filter((f) => f.endsWith(".ts"))
+      .map((f) => f.replace(/\.ts$/, ""));
+  } catch {
+    slugs = []; // no letters on this machine
+  }
+  if (slugs.length > 0) {
+    const assetDir = join(distDir, "assets");
+    const assets = (await readdir(assetDir)).filter((f) => f.endsWith(".js"));
+    for (const asset of assets) {
+      const js = await readFile(join(assetDir, asset), "utf8");
+      for (const slug of slugs) {
+        if (js.includes(`letters/${slug}`)) {
+          problems.push(`letter "${slug}" is bundled into assets/${asset}`);
+        }
+      }
+    }
+  }
+
+  if (problems.length === 0) {
+    console.log(
+      slugs.length > 0
+        ? `  ✓ ${slugs.length} local letter(s), none in dist`
+        : "  ✓ clean",
+    );
+    return true;
+  }
+  for (const p of problems) console.error(`  ✗ ${p}`);
+  return false;
+}
+
 await ensureDist();
-const ok = await copyPdfs();
-console.log(
-  ok ? "\ndist/ ready to deploy." : "\nFAILED — run `npm run pdf` first.",
-);
+console.log(`Cleaning dist:`);
+const removed = await stripJunk();
+if (removed === 0) console.log("  ✓ nothing to remove");
+const copied = await copyPdfs();
+const clean = await assertNoLetters();
+const ok = copied && clean;
+console.log(ok ? "\ndist/ ready to deploy." : "\nFAILED — see above.");
 process.exit(ok ? 0 : 1);

@@ -22,18 +22,16 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src:
-    url("/fonts/SerrifCompressed-Light.woff2") format("woff2"),
-    url("/fonts/SerrifCompressed-Light.woff") format("woff");
+  /* woff2 only. Vite ships an ES-module bundle, so any browser that can run
+     this app supports woff2 — the .woff fallback was unreachable. */
+  src: url("/fonts/SerrifCompressed-Light.woff2") format("woff2");
 }
 @font-face {
   font-family: "Serrif Compressed";
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src:
-    url("/fonts/SerrifCompressed-LightItalic.woff2") format("woff2"),
-    url("/fonts/SerrifCompressed-LightItalic.woff") format("woff");
+  src: url("/fonts/SerrifCompressed-LightItalic.woff2") format("woff2");
 }
 
 :root {
