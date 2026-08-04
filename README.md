@@ -34,8 +34,8 @@ GitHub, and Portfolio. It never appears in print or the PDFs.
 
 ## editing content: the one file
 
-All copy lives in [`src/data/resume.ts`](src/data/resume.ts). No need to touch a
-component to change what the resume says.
+All copy lives in [`src/data/resume.ts`](src/data/resume.ts). No need to touch
+a component to change what the resume says.
 
 Every field is authored once and is either **shared** across both tracks or
 **split** per track with `perTrack(creative, engineering)`:
@@ -75,23 +75,36 @@ parts because each runs ~75KB encoded against GitHub's ~48KB cap. The step
 checks the `wOF2` magic bytes after reassembly, since a truncated secret still
 decodes cleanly into garbage.
 
-## PDFs
+## resume PDFs
 
 ```bash
 npm run pdf        # builds, renders both tracks, runs the ATS check
 ```
 
-Outputs `pdfs/Jesse-Vaughan-Resume-Creative-Brand-Leader.pdf` and `-Engineer-Web-Architect.pdf` at
-US Letter via headless Chrome. It then re-proves the ATS guarantee with
-`pdftotext`: the text extracts in logical reading order (main column before
-sidebar) and each track keeps its content guardrails. Install `poppler`
-(`brew install poppler`) for the check; without it the PDFs still generate.
+Outputs `pdfs/Jesse-Vaughan-Resume-Creative-Brand-Leader.pdf` and
+`-Engineer-Web-Architect.pdf` at US Letter via headless Chrome. It then
+re-proves the ATS guarantee with `pdftotext`: the text extracts in logical
+reading order (main column before sidebar) and each track keeps its content
+guardrails. Install `poppler` (`brew install poppler`) for the check; without
+it the PDFs still generate.
 
 PDFs are gitignored (they embed the licensed fonts). `npm run ship` copies the
 two track PDFs into `dist/pdfs/` so the toolbar's Save PDF button has a target.
-Cover letters land in the same directory and are never published — the copy
-step is an explicit allowlist, and `publish.mjs` fails the build if anything
-else appears in `dist/pdfs/` or if a letter slug turns up in the bundle.
+
+## cover letters
+
+One file per application in `src/data/letters/`, gitignored. The slug comes
+from the filename, so `letters/new-relic.ts` renders at `?letter=new-relic`
+in place of the resume, reusing the masthead and whichever track the letter
+names. `npm run pdf` exports each one alongside the resumes and fails the
+build if any runs past a page — past that, cut copy rather than shrink type.
+
+They never reach the public site. The registry is only bundled when
+`INCLUDE_LETTERS=1` (`npm run dev` and `npm run pdf`); the deploy build
+aliases it to an empty stub, so `?letter=…` falls back to the resume. On top
+of that, `publish.mjs` copies only the two track PDFs by name and fails if
+anything else turns up in `dist/pdfs/` or if a letter slug appears in the
+bundle.
 
 ## deploy
 
@@ -103,7 +116,8 @@ The rsync uses `--delete` with excludes for `.dh-diag` (a DreamHost symlink),
 `.well-known/` (ACME challenges, so cert renewal can't be blocked), and
 `.DS_Store`.
 
-One non-obvious step: `sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0`.
+One non-obvious step:
+`sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0`.
 `ubuntu-latest` is now 24.04, which blocks the unprivileged user namespaces
 Chrome's sandbox needs, and puppeteer dies with "No usable sandbox!" without
 it. Preferred over `--no-sandbox` so the scripts behave identically here and
@@ -127,9 +141,9 @@ rsync -avz --delete \
 3. `scripts/publish.mjs` — strips `.DS_Store`, copies the track PDFs in,
    prerenders each track, and verifies both.
 
-Note; Local and CI builds produce byte-identical `dist/`. That's deliberate, and it's
-why `.DS_Store` gets stripped in the publish step rather than only excluded
-from the rsync.
+Local and CI builds produce byte-identical `dist/`. That's deliberate, and
+it's why `.DS_Store` gets stripped in the publish step rather than only
+excluded from the rsync.
 
 ### why prerender
 
@@ -138,12 +152,12 @@ a browser never notices. What does: a recruiter pasting the URL into Slack to
 send to a hiring manager gets an unfurl with no preview, and anything fetching
 without running JS gets a blank page.
 
-`publish.mjs` loads each track in the headless Chrome already installed for the
-PDFs, waits for the app to set its own title, description, canonical and OG
-tags from the resolved resume data, then writes `index.html`, `creative.html`,
-and `engineering.html`. `.htaccess` maps `/engineering` onto its file without a
-trailing slash, guarded by `-f` so a plain `npm run build` deploy falls through
-to the SPA fallback instead of 404ing.
+`publish.mjs` loads each track in the headless Chrome already installed for
+the PDFs, waits for the app to set its own title, description, canonical and
+OG tags from the resolved resume data, then writes `index.html`,
+`creative.html`, and `engineering.html`. `.htaccess` maps `/engineering` onto
+its file without a trailing slash, guarded by `-f` so a plain `npm run build`
+deploy falls through to the SPA fallback instead of 404ing.
 
 The snapshot is markup, not a hydration payload — React replaces it on mount.
 Its only job is to be readable by things that never run the script, so the
