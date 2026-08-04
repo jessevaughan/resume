@@ -10,9 +10,18 @@
 //
 // Run `npm run ship`, which sequences the whole thing correctly.
 
-import { mkdir, stat, copyFile, readdir, readFile, rm } from "node:fs/promises";
-import { join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import {
+  mkdir,
+  stat,
+  copyFile,
+  readdir,
+  readFile,
+  writeFile,
+  rm,
+} from "node:fs/promises";
+import { createServer } from "node:http";
+import { extname } from "node:path";
+import puppeteer from "puppeteer";
 
 const root = resolve(fileURLToPath(new URL(".", import.meta.url)), "..");
 const distDir = join(root, "dist");
@@ -58,6 +67,25 @@ async function copyPdfs() {
   return ok;
 }
 
+// Which static file each track is snapshotted into. The default track owns
+// index.html so the bare URL serves it without a rewrite; the others get their
+// own file, which .htaccess maps the clean path onto. `creative.html` exists so
+// the alias URL is also a real file rather than only a client-side redirect.
+const PRERENDER = [
+  { id: "creative", out: ["index.html", "creative.html"] },
+  { id: "engineering", out: ["engineering.html"] },
+];
+
+const MIME = {
+  ".html": "text/html",
+  ".js": "text/javascript",
+  ".css": "text/css",
+  ".svg": "image/svg+xml",
+  ".png": "image/png",
+  ".woff2": "font/woff2",
+  ".json": "application/json",
+};
+
 // Finder writes .DS_Store into any directory you open, including public/,
 // and Vite copies public/ into dist/ wholesale — it has no filter for that.
 // CI never hits this (Linux, fresh checkout, gitignored), so without this a
@@ -70,6 +98,94 @@ async function stripJunk() {
     console.log(`  ✓ removed ${file}`);
   }
   return junk.length;
+}
+
+// ── Prerender ──────────────────────────────────────────────────────────
+// This is a Vite SPA, so dist/index.html ships as an empty shell. A human with
+// a browser never notices. What does: a recruiter pasting the URL into Slack
+// to send to a hiring manager gets an unfurl with no preview, and anything
+// fetching without running JS gets a blank page.
+//
+// Loading each track in the headless Chrome already installed for the PDFs and
+// writing what comes back fixes both. The snapshot is markup, not a hydration
+// payload — React replaces it on mount. Its only job is to be readable by
+// things that never run the script.
+function startServer() {
+  const server = createServer(async (req, res) => {
+    try {
+      const pathname = decodeURIComponent(
+        new URL(req.url, "http://localhost").pathname,
+      );
+      const rel =
+        pathname === "/" ? "index.html" : pathname.replace(/^\/+/, "");
+      const filePath = join(distDir, rel);
+      if (!filePath.startsWith(distDir)) return res.writeHead(403).end();
+      const body = await readFile(filePath);
+      res.writeHead(200, {
+        "content-type": MIME[extname(filePath)] ?? "application/octet-stream",
+      });
+      res.end(body);
+    } catch {
+      res.writeHead(404).end("Not found");
+    }
+  });
+  return new Promise((r) =>
+    server.listen(0, "127.0.0.1", () =>
+      r({ server, port: server.address().port }),
+    ),
+  );
+}
+
+async function prerender(port) {
+  console.log("\nPrerendering tracks:");
+  const browser = await puppeteer.launch({ headless: true });
+  try {
+    const page = await browser.newPage();
+    for (const { id, out } of PRERENDER) {
+      // Loaded by ?track=, which useTrack still honours, because this local
+      // server has no rewrite rules. On the real host the app reads the path
+      // instead and resolves to the same track.
+      await page.goto(`http://127.0.0.1:${port}/?track=${id}`, {
+        waitUntil: "networkidle0",
+      });
+      await page.evaluate(async () => {
+        await document.fonts.ready;
+      });
+      const html = await page.content();
+      for (const file of out) {
+        await writeFile(join(distDir, file), html, "utf8");
+        console.log(`  ✓ ${file}`);
+      }
+    }
+  } finally {
+    await browser.close();
+  }
+}
+
+async function verifyHtml() {
+  console.log("\nChecking the static HTML carries content:");
+  let ok = true;
+  for (const { out } of PRERENDER) {
+    const file = out[0];
+    const html = await readFile(join(distDir, file), "utf8");
+    const problems = [];
+    if (!html.includes(NAME)) problems.push("name missing from markup");
+    if (!/<meta[^>]+property="og:title"/.test(html))
+      problems.push("no og:title");
+    if (!/<meta[^>]+name="description"/.test(html))
+      problems.push("no description");
+    if (!/<link[^>]+rel="canonical"/.test(html)) problems.push("no canonical");
+    if (html.length < 4000)
+      problems.push(`suspiciously small (${html.length}b)`);
+    if (problems.length === 0) {
+      console.log(`  ✓ ${file}: renders without JS`);
+    } else {
+      ok = false;
+      console.error(`  ✗ ${file}:`);
+      for (const p of problems) console.error(`      - ${p}`);
+    }
+  }
+  return ok;
 }
 
 // ── Cover-letter guard ─────────────────────────────────────────────────
@@ -134,7 +250,14 @@ console.log(`Cleaning dist:`);
 const removed = await stripJunk();
 if (removed === 0) console.log("  ✓ nothing to remove");
 const copied = await copyPdfs();
+const { server, port } = await startServer();
+try {
+  await prerender(port);
+} finally {
+  server.close();
+}
+const rendered = await verifyHtml();
 const clean = await assertNoLetters();
-const ok = copied && clean;
+const ok = copied && rendered && clean;
 console.log(ok ? "\ndist/ ready to deploy." : "\nFAILED — see above.");
 process.exit(ok ? 0 : 1);
