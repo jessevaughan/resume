@@ -1,4 +1,4 @@
-import { REPO_URL, TRACKS, TRACK_LABELS, pdfHref, type Track } from '../tracks'
+import { REPO_URL, TRACKS, TRACK_LABELS, pdfHref, type Track } from "../tracks";
 
 /**
  * Screen-only chrome: the track switcher plus the things a reader wants once
@@ -15,9 +15,9 @@ export function Toolbar({
   onChange,
   portfolioUrl,
 }: {
-  track: Track
-  onChange: (track: Track) => void
-  portfolioUrl: string
+  track: Track;
+  onChange: (track: Track) => void;
+  portfolioUrl: string;
 }) {
   return (
     <div className="toolbar">
@@ -44,7 +44,7 @@ export function Toolbar({
         <a className="toolbar__action" href={pdfHref(track)} download>
           Save PDF
         </a>
-        
+        <a
           className="toolbar__action"
           href={REPO_URL}
           target="_blank"
@@ -57,5 +57,5 @@ export function Toolbar({
         </a>
       </div>
     </div>
-  )
+  );
 }

@@ -1,12 +1,8 @@
 import { Fragment, type ReactNode } from "react";
-import type { Contact } from "../resume-schema";
+import { siteHref, linkedinHref, type Contact } from "../resume-schema";
 
 // ensp / ensp, matching my hand-built contact line's spacing.
 const CONTACT_SEP = " / ";
-
-/** Values are stored bare ("jessevaughan.com"), so add a scheme for the href. */
-const url = (value: string) =>
-  /^https?:\/\//.test(value) ? value : `https://${value}`;
 
 /**
  * External links open in a new tab so a recruiter reading the web version
@@ -33,7 +29,7 @@ export function Masthead({
     {
       key: "site",
       node: (
-        <a href={contact.siteUrl ?? url(contact.site)} {...EXTERNAL}>
+        <a href={siteHref(contact)} {...EXTERNAL}>
           {contact.site}
         </a>
       ),
@@ -43,10 +39,7 @@ export function Masthead({
           {
             key: "linkedin",
             node: (
-              <a
-                href={contact.linkedinUrl ?? url(contact.linkedin)}
-                {...EXTERNAL}
-              >
+              <a href={linkedinHref(contact)} {...EXTERNAL}>
                 {contact.linkedin}
               </a>
             ),

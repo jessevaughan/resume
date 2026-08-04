@@ -13,8 +13,8 @@
 //  knows about tracks; it only ever sees resolved values.
 // ============================================================
 
-import type { Track } from './tracks'
-export { TRACKS, DEFAULT_TRACK, type Track } from './tracks'
+import type { Track } from "./tracks";
+export { TRACKS, DEFAULT_TRACK, type Track } from "./tracks";
 
 /**
  * A value that differs by track. Tagged with `_perTrack` so resolve()
@@ -23,53 +23,74 @@ export { TRACKS, DEFAULT_TRACK, type Track } from './tracks'
  * renaming a track in tracks.ts updates this type automatically.
  */
 export type PerTrack<T> = { readonly [K in Track]: T } & {
-  readonly _perTrack: true
-}
+  readonly _perTrack: true;
+};
 
 /** Author a value that differs by track. */
 export function perTrack<T>(creative: T, engineering: T): PerTrack<T> {
-  return { creative, engineering, _perTrack: true }
+  return { creative, engineering, _perTrack: true };
 }
 
 /** An authored value: shared across tracks, or split with perTrack(). */
-export type Tracked<T> = T | PerTrack<T>
+export type Tracked<T> = T | PerTrack<T>;
 
 function isPerTrack<T>(value: Tracked<T>): value is PerTrack<T> {
   return (
-    typeof value === 'object' &&
+    typeof value === "object" &&
     value !== null &&
     (value as PerTrack<T>)._perTrack === true
-  )
+  );
 }
 
 /** Collapse one authored value down to the given track. */
 export function resolve<T>(value: Tracked<T>, track: Track): T {
-  return isPerTrack(value) ? value[track] : value
+  return isPerTrack(value) ? value[track] : value;
 }
 
 // ---- authoring shape (what src/data/resume.ts fills in) ----
 
 export interface Contact {
   /** Display text for the site, e.g. "jessevaughan.com". */
-  site: string
+  site: string;
   /**
    * Where the site link actually points. Lets the printed text stay short
    * while the href carries the full canonical URL (www, https). Defaults to
    * https:// + `site` when omitted.
    */
-  siteUrl?: string
-  email: string
-  phone: string
+  siteUrl?: string;
+  email: string;
+  phone: string;
   /** Optional display text, e.g. "in/jessesvaughan". */
-  linkedin?: string
+  linkedin?: string;
   /**
    * Where the LinkedIn link points. Same display/href split as siteUrl, so the
    * printed text can be short while the href stays a real profile URL.
    * Defaults to https:// + `linkedin` when omitted.
    */
-  linkedinUrl?: string
-  location: string
+  linkedinUrl?: string;
+  location: string;
 }
+
+/** Values are stored bare ("jessevaughan.com"), so add a scheme for the href. */
+const withScheme = (value: string) =>
+  /^https?:\/\//.test(value) ? value : `https://${value}`;
+
+/**
+ * Where the site link points. `siteUrl` wins when set; otherwise the bare
+ * `site` value gets a scheme. Every consumer goes through this so the
+ * fallback documented on Contact.siteUrl lives in exactly one place.
+ */
+export const siteHref = (contact: Contact) =>
+  contact.siteUrl ?? withScheme(contact.site);
+
+/**
+ * Same display/href split for LinkedIn. Unlike `site`, the display value is
+ * itself optional, so this returns undefined when there's no profile to point
+ * at — the case Masthead already guards on before rendering the link.
+ */
+export const linkedinHref = (contact: Contact) =>
+  contact.linkedinUrl ??
+  (contact.linkedin ? withScheme(contact.linkedin) : undefined);
 
 /**
  * The "Functional title. Title of record is Senior Manager, Creative."
@@ -78,80 +99,80 @@ export interface Contact {
  * on Track B. That divergence is placement, not copy, so it lives here.
  */
 export interface JobNote {
-  text: string
-  placement: Tracked<'top' | 'bottom'>
+  text: string;
+  placement: Tracked<"top" | "bottom">;
 }
 
 export interface Job {
   /** Title of record line. Diverges only on the earliest (IC) role. */
-  title: Tracked<string>
+  title: Tracked<string>;
   /** "Company · date-range". Shared: same employers, same dates. */
-  company: string
-  dates: string
+  company: string;
+  dates: string;
   /** One-line role framing. Only the current role carries one. */
-  lede?: Tracked<string>
-  note?: JobNote
+  lede?: Tracked<string>;
+  note?: JobNote;
   /** On engineering I leave some roles title-only, hence a possibly empty list. */
-  bullets: Tracked<string[]>
+  bullets: Tracked<string[]>;
 }
 
 export interface SkillGroup {
-  heading: string
+  heading: string;
   /** Rendered joined by a middot; I keep it structured so it stays typed. */
-  items: string[]
+  items: string[];
 }
 
 export interface Education {
-  degree: string
-  focus: string
-  school: string
+  degree: string;
+  focus: string;
+  school: string;
 }
 
 export interface ResumeData {
-  name: string
-  role: Tracked<string>
-  contact: Contact
-  summary: Tracked<string>
-  highlights: Tracked<string[]>
-  experience: Job[]
+  name: string;
+  role: Tracked<string>;
+  contact: Contact;
+  summary: Tracked<string>;
+  highlights: Tracked<string[]>;
+  experience: Job[];
   skills: {
-    heading: Tracked<string>
-    groups: Tracked<SkillGroup[]>
-  }
-  education: Education
+    heading: Tracked<string>;
+    groups: Tracked<SkillGroup[]>;
+  };
+  education: Education;
 }
 
 // ---- resolved shape (what components consume) ----
 
 export interface ResolvedJob {
-  title: string
-  company: string
-  dates: string
-  lede?: string
-  note?: { text: string; placement: 'top' | 'bottom' }
-  bullets: string[]
+  title: string;
+  company: string;
+  dates: string;
+  lede?: string;
+  note?: { text: string; placement: "top" | "bottom" };
+  bullets: string[];
 }
 
 export interface ResolvedResume {
-  track: Track
-  name: string
-  role: string
+  track: Track;
+  name: string;
+  role: string;
   /** Browser <title>, e.g. "Jesse Vaughan — Design Engineer · Web Architect". */
-  documentTitle: string
-  contact: Contact
-  summary: string
-  highlights: string[]
-  experience: ResolvedJob[]
+  documentTitle: string;
+  contact: Contact;
+  summary: string;
+  highlights: string[];
+  experience: ResolvedJob[];
   skills: {
-    heading: string
-    groups: SkillGroup[]
-  }
-  education: Education
+    heading: string;
+    groups: SkillGroup[];
+  };
+  education: Education;
 }
 
 /** Collapse the full authoring model down to a single track. */
 export function resolveResume(data: ResumeData, track: Track): ResolvedResume {
-  const role = resolve(data.role, track)
+  const role = resolve(data.role, track);
   return {
     track,
     name: data.name,
@@ -168,7 +189,10 @@ export function resolveResume(data: ResumeData, track: Track): ResolvedResume {
       note:
         job.note === undefined
           ? undefined
-          : { text: job.note.text, placement: resolve(job.note.placement, track) },
+          : {
+              text: job.note.text,
+              placement: resolve(job.note.placement, track),
+            },
       bullets: resolve(job.bullets, track),
     })),
     skills: {
@@ -176,5 +200,5 @@ export function resolveResume(data: ResumeData, track: Track): ResolvedResume {
       groups: resolve(data.skills.groups, track),
     },
     education: data.education,
-  }
+  };
 }

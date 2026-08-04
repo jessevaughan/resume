@@ -1,41 +1,46 @@
-import { resolveResume } from './resume-schema'
-import { resume } from './data/resume'
-import { letters } from '@letters'
-import { Resume } from './components/Resume'
-import { CoverLetter } from './components/CoverLetter'
-import { TrackSwitcher } from './components/TrackSwitcher'
-import { useTrack } from './useTrack'
+import { resolveResume, siteHref } from "./resume-schema";
+import { resume } from "./data/resume";
+import { letters } from "@letters";
+import { Resume } from "./components/Resume";
+import { CoverLetter } from "./components/CoverLetter";
+import { Toolbar } from "./components/Toolbar";
+import { useTrack } from "./useTrack";
 
 function App() {
-  const [track, setTrack] = useTrack()
+  const [track, setTrack] = useTrack();
+  const resolved = resolveResume(resume, track);
 
   // ?letter=headway renders a cover letter instead of the resume. Letters are
   // local-only: the production build ships an empty registry, so an unknown
   // slug just falls back to the resume rather than erroring.
-  const slug = new URLSearchParams(window.location.search).get('letter')
-  const letter = slug ? letters.find((l) => l.slug === slug) : undefined
+  const slug = new URLSearchParams(window.location.search).get("letter");
+  const letter = slug ? letters.find((l) => l.slug === slug) : undefined;
 
   if (letter) {
-    const resolved = resolveResume(resume, letter.track)
+    const forLetter = resolveResume(resume, letter.track);
     const contact = letter.email
-      ? { ...resolved.contact, email: letter.email }
-      : resolved.contact
+      ? { ...forLetter.contact, email: letter.email }
+      : forLetter.contact;
     return (
       <CoverLetter
         letter={letter}
-        name={resolved.name}
-        role={resolved.role}
+        name={forLetter.name}
+        role={forLetter.role}
         contact={contact}
       />
-    )
+    );
   }
 
   return (
     <>
-      <TrackSwitcher track={track} onChange={setTrack} />
-      <Resume resume={resolveResume(resume, track)} />
+      <Toolbar
+        track={track}
+        onChange={setTrack}
+        portfolioUrl={siteHref(resolved.contact)}
+      />
+      <Resume resume={resolved} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
