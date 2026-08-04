@@ -1,12 +1,13 @@
 /* App chrome — not part of the resume itself. Screen-only, hidden in
    print so it never lands in the PDF or affects page geometry. */
 
-.track-switcher {
+.toolbar {
   position: fixed;
   top: 16px;
   right: 16px;
   z-index: 10;
   display: flex;
+  align-items: center;
   gap: 4px;
   padding: 4px;
   background: #fff;
@@ -16,7 +17,24 @@
   font-family: var(--font-sans);
 }
 
-.track-switcher button {
+.toolbar__group {
+  display: flex;
+  gap: 4px;
+}
+
+/* Separates the tracks from the actions. Inset vertically so it reads as a
+   divider between groups rather than a full-height border. */
+.toolbar__rule {
+  width: 1px;
+  align-self: stretch;
+  margin: 3px 4px;
+  background: var(--rule);
+}
+
+/* The actions are <a>, the tracks are <button>. Normalizing both here keeps
+   one visual rule rather than a second block that has to be kept in step. */
+.toolbar__track,
+.toolbar__action {
   font: inherit;
   font-size: 11px;
   letter-spacing: 0.02em;
@@ -26,20 +44,36 @@
   background: transparent;
   color: var(--muted);
   cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  line-height: 1.4;
 }
 
-.track-switcher button:hover {
+.toolbar__track:hover,
+.toolbar__action:hover {
   color: var(--ink);
   background: #f2f1ee;
 }
 
-.track-switcher button[aria-pressed="true"] {
+.toolbar__track[aria-pressed="true"] {
   color: #fff;
   background: var(--accent);
 }
 
+/* Narrow screens: the toolbar spans the top rather than floating in a corner,
+   where five labels at 11px would otherwise wrap into the resume's margin. */
+@media (max-width: 640px) {
+  .toolbar {
+    top: 8px;
+    right: 8px;
+    left: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
 @media print {
-  .track-switcher {
+  .toolbar {
     display: none;
   }
 }
