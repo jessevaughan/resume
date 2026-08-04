@@ -35,3 +35,25 @@ export const TRACK_BY_PATH: Record<string, Track> = {
   "/creative": "creative",
   "/engineering": "engineering",
 };
+
+// ── PDFs ───────────────────────────────────────────────────────────────
+// KEEP IN SYNC with scripts/pdf.mjs, which derives the same filenames from
+// its own NAME + per-track `name` config and is not type-checked. The two are
+// hand-synced on purpose, matching the existing arrangement for the ATS check
+// config; if they drift, the download button 404s.
+const PDF_OWNER = "Jesse Vaughan";
+
+const PDF_SUFFIX: Record<Track, string> = {
+  creative: "Creative-Brand-Leader",
+  engineering: "Engineer-Web-Architect",
+};
+
+/**
+ * Public path to a track's PDF. scripts/publish.mjs (batch 3) copies exactly
+ * these two files into dist/pdfs/. Cover letters are never copied.
+ */
+export function pdfHref(track: Track): string {
+  return `/pdfs/${PDF_OWNER.replace(/\s+/g, "-")}-Resume-${PDF_SUFFIX[track]}.pdf`;
+}
+
+export const REPO_URL = "https://github.com/jessevaughan/resume";
