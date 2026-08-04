@@ -74,13 +74,21 @@ PDFs are gitignored (they embed the licensed fonts)
 
 ## deploy
 
-`npm run build` emits static files to `dist/`. Deploy is manual for now: build,
-then upload `dist/` to your host. For DreamHost over SSH that's an rsync:
-
 ```bash
-npm run build
+npm run ship
 rsync -avz --delete dist/ user@host:/home/user/resume.jessevaughan.com/
 ```
+
+`npm run ship` runs three steps in an order that matters:
+
+1. `npm run pdf` — builds with `INCLUDE_LETTERS=1` and renders the PDFs.
+2. `npm run build` — rebuilds clean, so the cover letters are **not** in the
+   deployed bundle. The PDF build's `dist/` is discarded here on purpose.
+3. `scripts/publish.mjs` — copies the two track PDFs into `dist/pdfs/`.
+
+Only the two resume PDFs are copied, by name. Cover letters are generated into
+the same `pdfs/` directory and are never published, so the copy step is an
+explicit list rather than a glob. Keep it that way.
 
 The licensed fonts in `public/fonts/` get copied into `dist/` at build, so the
 live site ships them as long as they're present locally.
