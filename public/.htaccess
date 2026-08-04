@@ -14,3 +14,10 @@ RewriteEngine On
 RewriteCond %{REQUEST_URI} !^/\.well-known/
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ── Track routes ───────────────────────────────────────────────────────
+# Each track is a path (see src/tracks.ts). The app resolves the track from
+# the path client-side, so both routes serve the same SPA shell.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(creative|engineering)/?$ /index.html [L]
