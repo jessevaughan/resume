@@ -19,11 +19,18 @@ npm run dev        # http://localhost:5173
 ```
 
 - `http://localhost:5173/`: creative track (the default)
-- `http://localhost:5173/?track=engineering`: engineering track
+- `http://localhost:5173/engineering`: engineering track
 
-The track lives in the URL, so either positioning is a link you can drop
-straight into an application. A small screen-only switcher (top-right) flips
-between them; it never appears in print or the PDFs.
+Each track is a path, so either positioning is a link you can drop straight
+into an application and a crawler can index separately. The default track
+keeps the bare root, because the short URL is the one that gets typed.
+
+`/creative` and the older `?track=engineering` both still resolve, and get
+rewritten to the canonical URL on arrival, so links shared before this change
+still land somewhere real.
+
+A screen-only toolbar (top-right) carries the track switcher plus Save PDF,
+GitHub, and Portfolio. It never appears in print or the PDFs.
 
 ## editing content: the one file
 
@@ -53,10 +60,20 @@ To make it your own: fork, replace `src/data/resume.ts` (and
 
 ## fonts
 
-Font files are **not** committed (licensed). Drop them in `public/fonts/` and
-they load from `/fonts/…` at dev, build, and PDF time. The `@font-face`
-declarations are at the top of `src/styles/resume.css`. Without the files the
-site falls back to the system stack.
+`Archivo-Thin.woff2` is open source and committed. The licensed Serrif faces
+are **not** in the repo: drop them in `public/fonts/` and they load from
+`/fonts/…` at dev, build, and PDF time. Without them the site falls back to
+the system stack, and nothing in the pipeline will tell you — `pdftotext`
+reads the PDF content stream, not the glyphs, so the ATS check passes either
+way. Check `pdffonts` on a rendered PDF if you're unsure.
+
+woff2 only. Vite ships an ES-module bundle, so every browser that can run this
+app supports woff2 and the `.woff` fallbacks were unreachable.
+
+CI restores the licensed faces from base64 repository secrets, split across
+parts because each runs ~75KB encoded against GitHub's ~48KB cap. The step
+checks the `wOF2` magic bytes after reassembly, since a truncated secret still
+decodes cleanly into garbage.
 
 ## PDFs
 
@@ -64,19 +81,42 @@ site falls back to the system stack.
 npm run pdf        # builds, renders both tracks, runs the ATS check
 ```
 
-Outputs `pdfs/Jesse-Vaughan-Resume-Creative-Brand-Leader..pdf` and `-Engineer-Web-Architect.pdf` at
+Outputs `pdfs/Jesse-Vaughan-Resume-Creative-Brand-Leader.pdf` and `-Engineer-Web-Architect.pdf` at
 US Letter via headless Chrome. It then re-proves the ATS guarantee with
 `pdftotext`: the text extracts in logical reading order (main column before
 sidebar) and each track keeps its content guardrails. Install `poppler`
 (`brew install poppler`) for the check; without it the PDFs still generate.
 
-PDFs are gitignored (they embed the licensed fonts)
+PDFs are gitignored (they embed the licensed fonts). `npm run ship` copies the
+two track PDFs into `dist/pdfs/` so the toolbar's Save PDF button has a target.
+Cover letters land in the same directory and are never published — the copy
+step is an explicit allowlist, and `publish.mjs` fails the build if anything
+else appears in `dist/pdfs/` or if a letter slug turns up in the bundle.
 
 ## deploy
 
+Push to `main`. `.github/workflows/deploy.yml` restores the licensed fonts
+from secrets, installs poppler, lints, runs `npm run ship`, and rsyncs `dist/`
+to DreamHost. Roughly 45 seconds.
+
+The rsync uses `--delete` with excludes for `.dh-diag` (a DreamHost symlink),
+`.well-known/` (ACME challenges, so cert renewal can't be blocked), and
+`.DS_Store`.
+
+One non-obvious step: `sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0`.
+`ubuntu-latest` is now 24.04, which blocks the unprivileged user namespaces
+Chrome's sandbox needs, and puppeteer dies with "No usable sandbox!" without
+it. Preferred over `--no-sandbox` so the scripts behave identically here and
+locally.
+
+To deploy by hand:
+
 ```bash
 npm run ship
-rsync -avz --delete dist/ user@host:/home/user/resume.jessevaughan.com/
+rsync -avz --delete \
+  --exclude='.dh-diag' --exclude='.well-known/***' --exclude='.DS_Store' \
+  -e "ssh -i ~/.ssh/resume_deploy -o IdentitiesOnly=yes" \
+  dist/ USER@HOST:/home/USER/resume.jessevaughan.com/
 ```
 
 `npm run ship` runs three steps in an order that matters:
@@ -84,14 +124,30 @@ rsync -avz --delete dist/ user@host:/home/user/resume.jessevaughan.com/
 1. `npm run pdf` — builds with `INCLUDE_LETTERS=1` and renders the PDFs.
 2. `npm run build` — rebuilds clean, so the cover letters are **not** in the
    deployed bundle. The PDF build's `dist/` is discarded here on purpose.
-3. `scripts/publish.mjs` — copies the two track PDFs into `dist/pdfs/`.
+3. `scripts/publish.mjs` — strips `.DS_Store`, copies the track PDFs in,
+   prerenders each track, and verifies both.
 
-Only the two resume PDFs are copied, by name. Cover letters are generated into
-the same `pdfs/` directory and are never published, so the copy step is an
-explicit list rather than a glob. Keep it that way.
+Note; Local and CI builds produce byte-identical `dist/`. That's deliberate, and it's
+why `.DS_Store` gets stripped in the publish step rather than only excluded
+from the rsync.
 
-The licensed fonts in `public/fonts/` get copied into `dist/` at build, so the
-live site ships them as long as they're present locally.
+### why prerender
+
+This is a Vite SPA, so `dist/index.html` ships as an empty shell. A human with
+a browser never notices. What does: a recruiter pasting the URL into Slack to
+send to a hiring manager gets an unfurl with no preview, and anything fetching
+without running JS gets a blank page.
+
+`publish.mjs` loads each track in the headless Chrome already installed for the
+PDFs, waits for the app to set its own title, description, canonical and OG
+tags from the resolved resume data, then writes `index.html`, `creative.html`,
+and `engineering.html`. `.htaccess` maps `/engineering` onto its file without a
+trailing slash, guarded by `-f` so a plain `npm run build` deploy falls through
+to the SPA fallback instead of 404ing.
+
+The snapshot is markup, not a hydration payload — React replaces it on mount.
+Its only job is to be readable by things that never run the script, so the
+check is that the text and the meta tags are actually in the HTML.
 
 ## layout / ATS notes
 
