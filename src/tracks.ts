@@ -57,3 +57,4 @@ export function pdfHref(track: Track): string {
 }
 
 export const REPO_URL = "https://github.com/jessevaughan/resume";
+export const SITE_URL = "https://resume.jessevaughan.com";
