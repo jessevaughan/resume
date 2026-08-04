@@ -90,6 +90,14 @@ jobs:
           write SerrifCompressed-LightItalic.woff2 "$SERRIF_ITALIC_A" "$SERRIF_ITALIC_B" "$SERRIF_ITALIC_C"
           ls -lh public/fonts/*.woff2 | awk '{print $5, $9}'
 
+      # Ubuntu 24.04 (what ubuntu-latest now resolves to) blocks unprivileged
+      # user namespaces via AppArmor, and Chrome's sandbox needs them — puppeteer
+      # dies with "No usable sandbox!" without this. Re-enabling the kernel
+      # setting is preferable to passing --no-sandbox, which would mean the
+      # scripts behave differently here than they do locally.
+      - name: Allow Chrome's sandbox
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+
       # pdftotext, for the ATS reading-order check inside scripts/pdf.mjs.
       # Without it that check is skipped and the PDFs still generate, which is
       # exactly the silent pass this pipeline exists to prevent.
