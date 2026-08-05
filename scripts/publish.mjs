@@ -149,7 +149,7 @@ async function prerender(port) {
     await page.setViewport({ width: 1280, height: 1600 });
 
     for (const { id, out } of PRERENDER) {
-      // Loaded by ?track=, which useTrack still honours, because this local
+      // Loaded by ?track=, which useTrack still honors, because this local
       // server has no rewrite rules. On the real host the app reads the path
       // instead and resolves to the same track.
       await page.goto(`http://127.0.0.1:${port}/?track=${id}`, {

@@ -48,7 +48,7 @@ export function Toolbar({
       <div className="toolbar__actions">
         {/* download, not target=_blank: the point is to put a named file in
             the reader's downloads folder rather than open a viewer they then
-            have to save out of. Same-origin, so the attribute is honoured. */}
+            have to save out of. Same-origin, so the attribute is honored. */}
         <a
           className="toolbar__icon"
           href={pdfHref(track)}

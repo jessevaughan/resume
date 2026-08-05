@@ -110,7 +110,7 @@ export const resume: ResumeData = {
       company: "AdRoll (NextRoll)",
       dates: "2017–2018",
       // Creative is the space-constrained track at one page, so this role goes
-      // title-only there (its neighbours already are). Engineering has the room
+      // title-only there (its neighbors already are). Engineering has the room
       // and keeps the line.
       bullets: perTrack(
         [],

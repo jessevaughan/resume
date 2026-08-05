@@ -3,7 +3,7 @@
  * justify a package, and inlining means no extra request and no flash of a
  * missing icon before it loads.
  *
- * All of them inherit currentColor and size to 1em, so the toolbar's colour
+ * All of them inherit currentColor and size to 1em, so the toolbar's color
  * and font-size rules drive them and nothing needs restating here.
  *
  * aria-hidden on every one. The links that wrap them carry the accessible

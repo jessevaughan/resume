@@ -1,9 +1,9 @@
 <!-- Jesse Vaughan, avatar with the misregistration plates baked in.
      Static export of the live effect on jessevaughan.com, frozen at the cursor in the bottom right corner.
 
-     Two pale plates drift opposite ways while the ink stays in register: one colour on
+     Two pale plates drift opposite ways while the ink stays in register: one color on
      each side of every stroke, darkening where they cross. That is what makes it read
-     as a bad press run rather than a drop shadow. A single coloured copy can only sit
+     as a bad press run rather than a drop shadow. A single colored copy can only sit
      BEHIND opaque ink, which reads as a glow.
 
      INK is #141414, the resume ink token. The source drawing ships filled in #635D4E,
@@ -30,7 +30,7 @@
      would and the eye discounts it. Up left keeps the base distance exactly.
 
      Self contained: no CSS, no fonts, no external refs. Built for light paper; on a
-     dark ground the ink would need recolouring first. -->
+     dark ground the ink would need recoloring first. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="120" viewBox="-6 -6 100 120" fill="none" role="img" aria-label="Illustrated portrait of Jesse Vaughan">
   <defs>
     <filter id="misreg" color-interpolation-filters="sRGB" x="-30%" y="-30%" width="160%" height="160%">
