@@ -142,6 +142,12 @@ async function prerender(port) {
   const browser = await puppeteer.launch({ headless: true });
   try {
     const page = await browser.newPage();
+    // Explicit, so the snapshot doesn't depend on puppeteer's default. Wide
+    // enough to clear the 900px mobile gate in styles/app.css — below it the
+    // resume is replaced by MobileNotice, and prerendering that would put the
+    // "read this on a wider screen" card into the static HTML a crawler sees.
+    await page.setViewport({ width: 1280, height: 1600 });
+
     for (const { id, out } of PRERENDER) {
       // Loaded by ?track=, which useTrack still honours, because this local
       // server has no rewrite rules. On the real host the app reads the path

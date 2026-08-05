@@ -46,6 +46,7 @@
   --muted: #635d4e; /* secondary text, metadata */
   --rule: #d9d9d9; /* hairlines */
   --accent: #0032ff;
+  --paper: #fafafa;
 
   /* type scale */
   --fs-name: 38pt;

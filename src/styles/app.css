@@ -136,15 +136,15 @@
 
 .mobile-notice__name {
   margin: 0;
-  font-family: var(--font-display, var(--font-sans));
-  font-size: 1.5rem;
+  font-family: var(--playful, var(--font-sans));
+  font-size: 2.5rem;
   line-height: 1.15;
   color: var(--ink);
 }
 
 .mobile-notice__role {
   margin: 4px 0 0;
-  font-size: 0.8125rem;
+  font-size: 1rem;
   letter-spacing: 0.02em;
   color: var(--muted);
 }
