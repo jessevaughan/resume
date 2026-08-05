@@ -1,5 +1,7 @@
-/* App chrome — not part of the resume itself. Screen-only, hidden in
-   print so it never lands in the PDF or affects page geometry. */
+/* App chrome — not part of the resume itself. Screen-only, hidden in print so
+   none of it lands in the PDF or affects page geometry. */
+
+/* ── Toolbar ───────────────────────────────────────────────────────── */
 
 .toolbar {
   position: fixed;
@@ -8,49 +10,53 @@
   z-index: 10;
   display: flex;
   align-items: center;
-  gap: 4px;
   padding: 4px;
   background: #fff;
   border: 1px solid var(--rule);
-  border-radius: 8px;
+  border-radius: 9px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   font-family: var(--font-sans);
 }
 
-.toolbar__group {
+.toolbar__tracks,
+.toolbar__actions {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  gap: 2px;
 }
 
 /* Separates the tracks from the actions. Inset vertically so it reads as a
-   divider between groups rather than a full-height border. */
+   divider between groups rather than a full-height border. The margin is the
+   only gap between the two groups, so it carries more space than the 2px
+   between siblings inside each group. */
 .toolbar__rule {
   width: 1px;
   align-self: stretch;
-  margin: 3px 4px;
+  margin: 4px 7px;
   background: var(--rule);
 }
 
-/* The actions are <a>, the tracks are <button>. Normalizing both here keeps
-   one visual rule rather than a second block that has to be kept in step. */
-.toolbar__track,
-.toolbar__action {
+/* Primary: choosing a track changes what you're reading. The actions beside
+   it only fetch a file or navigate away, so they sit a rank quieter. */
+.toolbar__track {
   font: inherit;
-  font-size: 11px;
-  letter-spacing: 0.02em;
-  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 6px 13px;
   border: 0;
-  border-radius: 5px;
+  border-radius: 6px;
   background: transparent;
   color: var(--muted);
   cursor: pointer;
   white-space: nowrap;
-  text-decoration: none;
   line-height: 1.4;
+  transition:
+    color 0.14s ease,
+    background-color 0.14s ease;
 }
 
-.toolbar__track:hover,
-.toolbar__action:hover {
+.toolbar__track:hover {
   color: var(--ink);
   background: #f2f1ee;
 }
@@ -60,20 +66,149 @@
   background: var(--accent);
 }
 
-/* Narrow screens: the toolbar spans the top rather than floating in a corner,
-   where five labels at 11px would otherwise wrap into the resume's margin. */
-@media (max-width: 640px) {
+/* Secondary: square targets sized by font-size, since every icon is 1em and
+   inherits currentColor. 30px is under the 44px touch guideline on purpose —
+   these are supplementary on a page that is mostly text, and below 640px the
+   resume is replaced by .mobile-notice anyway, which has its own controls. */
+.toolbar__icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+  border-radius: 6px;
+  color: var(--muted);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color 0.14s ease,
+    background-color 0.14s ease;
+}
+
+.toolbar__icon:hover {
+  color: var(--ink);
+  background: #f2f1ee;
+}
+
+/* ── Mobile notice ─────────────────────────────────────────────────────
+   The resume is a fixed 8.5in page, so below roughly that width there is no
+   honest way to show it. This replaces it rather than shrinking it.
+
+   Everything here is scoped to `screen`. scripts/pdf.mjs never calls
+   setViewport, so puppeteer renders at its 800x600 default — a gate that
+   reached print media would put this card in the PDFs. */
+.mobile-notice {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  /* body IS the page in resume.css (width: 8.5in), so there is no wrapper to
+     hide. Covering it with a fixed overlay avoids reaching into that layout at
+     all, and leaves the resume in the DOM for crawlers and the prerender. */
+  .mobile-notice {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: var(--paper, #f5f2ea);
+    font-family: var(--font-sans);
+    overflow-y: auto;
+  }
+
+  /* The toolbar's controls are duplicated inside the card, so showing both
+     would put two track switchers on one screen. */
   .toolbar {
-    top: 8px;
-    right: 8px;
-    left: 8px;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: none;
   }
 }
 
+.mobile-notice__card {
+  width: 100%;
+  max-width: 26rem;
+  padding: 28px 24px 24px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.mobile-notice__name {
+  margin: 0;
+  font-family: var(--font-display, var(--font-sans));
+  font-size: 1.5rem;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.mobile-notice__role {
+  margin: 4px 0 0;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.mobile-notice__body {
+  margin: 18px 0 20px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.mobile-notice__tracks {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.mobile-notice__track {
+  flex: 1;
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  /* 44px tall. Unlike the desktop toolbar these are the only way to switch
+     track on a phone, so they take the full touch target. */
+  padding: 12px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.mobile-notice__track[aria-pressed="true"] {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.mobile-notice__download {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 16px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.mobile-notice__link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
 @media print {
-  .toolbar {
-    display: none;
+  .toolbar,
+  .mobile-notice {
+    display: none !important;
   }
 }

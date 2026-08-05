@@ -6,6 +6,7 @@ import { CoverLetter } from "./components/CoverLetter";
 import { Toolbar } from "./components/Toolbar";
 import { useTrack } from "./useTrack";
 import { useDocumentMeta } from "./useDocumentMeta";
+import { MobileNotice } from "./components/MobileNotice";
 
 function App() {
   const [track, setTrack] = useTrack();
@@ -46,6 +47,13 @@ function App() {
         portfolioUrl={siteHref(resolved.contact)}
       />
       <Resume resume={resolved} />
+      <MobileNotice
+        track={track}
+        onChange={setTrack}
+        name={resolved.name}
+        role={resolved.role}
+        portfolioUrl={siteHref(resolved.contact)}
+      />
     </>
   );
 }

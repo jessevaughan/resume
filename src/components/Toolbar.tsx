@@ -1,4 +1,5 @@
 import { REPO_URL, TRACKS, TRACK_LABELS, pdfHref, type Track } from "../tracks";
+import { CodeIcon, DownloadIcon, PortfolioIcon } from "./icons";
 
 /**
  * Screen-only chrome: the track switcher plus the things a reader wants once
@@ -7,8 +8,15 @@ import { REPO_URL, TRACKS, TRACK_LABELS, pdfHref, type Track } from "../tracks";
  *
  * The URL is still the real interface. This is the convenience layer.
  *
- * portfolioUrl comes in as a prop rather than living here as a constant,
- * because the resume's contact block already carries it. One source.
+ * The tracks read as buttons and the three actions as icons, because they are
+ * different kinds of thing: switching track changes what you're reading, while
+ * the actions take you elsewhere or hand you a file. Weighting them equally
+ * made the toolbar a row of five things with no hierarchy.
+ *
+ * Every icon link carries an aria-label AND a title. The label is the
+ * accessible name, without which the link announces as its URL; the title is
+ * the hover tooltip, without which a sighted reader has to guess. Neither
+ * covers for the other.
  */
 export function Toolbar({
   track,
@@ -21,7 +29,7 @@ export function Toolbar({
 }) {
   return (
     <div className="toolbar">
-      <div className="toolbar__group" role="group" aria-label="Resume track">
+      <div className="toolbar__tracks" role="group" aria-label="Resume track">
         {TRACKS.map((t) => (
           <button
             key={t}
@@ -37,23 +45,36 @@ export function Toolbar({
 
       <span className="toolbar__rule" aria-hidden="true" />
 
-      <div className="toolbar__group">
+      <div className="toolbar__actions">
         {/* download, not target=_blank: the point is to put a named file in
             the reader's downloads folder rather than open a viewer they then
             have to save out of. Same-origin, so the attribute is honoured. */}
-        <a className="toolbar__action" href={pdfHref(track)} download>
-          Save PDF
+        <a
+          className="toolbar__icon"
+          href={pdfHref(track)}
+          download
+          aria-label={`Download the ${TRACK_LABELS[track].toLowerCase()} resume as a PDF`}
+          title="Download PDF"
+        >
+          <DownloadIcon />
         </a>
         <a
-          className="toolbar__action"
+          className="toolbar__icon"
           href={REPO_URL}
           target="_blank"
           rel="noopener"
+          aria-label="Source code on GitHub"
+          title="Source on GitHub"
         >
-          GitHub
+          <CodeIcon />
         </a>
-        <a className="toolbar__action" href={portfolioUrl}>
-          Portfolio
+        <a
+          className="toolbar__icon"
+          href={portfolioUrl}
+          aria-label="Jesse Vaughan's portfolio"
+          title="Portfolio"
+        >
+          <PortfolioIcon />
         </a>
       </div>
     </div>
