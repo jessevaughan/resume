@@ -29,8 +29,13 @@ keeps the bare root, because the short URL is the one that gets typed.
 rewritten to the canonical URL on arrival, so links shared before this change
 still land somewhere real.
 
-A screen-only toolbar (top-right) carries the track switcher plus Save PDF,
-GitHub, and Portfolio. It never appears in print or the PDFs.
+A screen-only toolbar (top-right) carries the track switcher plus icon links
+for the PDF, the source, and the portfolio. It never appears in print or the
+PDFs.
+
+Below 900px the resume is replaced by a card with the track switcher and a
+Download PDF, since an 8.5in page has no honest small-screen layout. The PDF
+reads fine in any mobile viewer, so a phone visitor isn't dead-ended.
 
 ## editing content: the one file
 
@@ -168,3 +173,10 @@ check is that the text and the meta tags are actually in the HTML.
 - Markup order is header → summary → highlights → experience → skills →
   education, so a PDF text extractor reads it logically. The sidebar is placed
   left with CSS grid, not markup order. Keep it that way.
+- The toolbar and the mobile gate are scoped to `@media screen`. `pdf.mjs`
+  renders at puppeteer's 800x600 default, so an unscoped 900px breakpoint
+  would put the mobile card into the PDFs.
+- The mobile gate is CSS, never a JS width check. `publish.mjs` prerenders
+  through headless Chrome, so a JS gate would bake one viewport's state into
+  the static HTML and drop the resume text from what a crawler reads. Its
+  viewport is pinned to 1280 for the same reason.
