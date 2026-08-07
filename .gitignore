@@ -28,6 +28,8 @@ pnpm-debug.log*
 /public/fonts/*.woff
 /public/fonts/*.woff2
 !/public/fonts/Archivo-*.woff2
+# Archivo's upstream .ttf sources (the variable font and the foundry statics).
+/public/fonts/*.ttf
 /cover-letters/*
 
 public/fonts/.DS_Store

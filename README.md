@@ -65,15 +65,29 @@ To make it your own: fork, replace `src/data/resume.ts` (and
 
 ## fonts
 
-`Archivo-Thin.woff2` is open source and committed. The licensed Serrif faces
-are **not** in the repo: drop them in `public/fonts/` and they load from
-`/fonts/…` at dev, build, and PDF time. Without them the site falls back to
-the system stack, and nothing in the pipeline will tell you — `pdftotext`
-reads the PDF content stream, not the glyphs, so the ATS check passes either
-way. Check `pdffonts` on a rendered PDF if you're unsure.
+Archivo is open source and committed: four static cuts in `public/fonts/` at
+400, 425, 450, and 700. The first three are the body tuning range — set
+`--fw-body` in [`src/styles/resume.css`](src/styles/resume.css) and the browser
+picks the matching file. 700 is job titles. Only the two weights actually in
+use get fetched.
+
+The licensed Serrif faces are **not** in the repo: drop them in `public/fonts/`
+and they load from `/fonts/…` at dev, build, and PDF time. Without them the site
+falls back to the system stack, and nothing in the pipeline will tell you —
+`pdftotext` reads the PDF content stream, not the glyphs, so the ATS check
+passes either way. Check `pdffonts` on a rendered PDF if you're unsure.
 
 woff2 only. Vite ships an ES-module bundle, so every browser that can run this
 app supports woff2 and the `.woff` fallbacks were unreachable.
+
+Static cuts rather than the variable font, which is the non-obvious part:
+Chrome can't embed a live variable instance as real TrueType in a PDF, so it
+falls back to Type 3 glyphs, and Type 3 text loses its word spaces in
+`pdftotext` — "Sixteen years across" extracts as "Sixteenyearsacross". The ATS
+check won't catch that, since it strips whitespace before comparing. `pdffonts`
+is the tell: every Archivo object should read CID TrueType. The cuts come from
+`Archivo-VariableFont_wdth,wght.ttf` via fontTools `varLib.instancer`; that
+file and the foundry statics are gitignored, being source rather than payload.
 
 CI restores the licensed faces from base64 repository secrets, split across
 parts because each runs ~75KB encoded against GitHub's ~48KB cap. The step
@@ -113,7 +127,7 @@ bundle.
 
 ## deploy
 
-Push to `main`. `.github/workflows/deploy.yml` restores the licensed fonts
+Push to `main`. `.github/workflows/deploy.yaml` restores the licensed fonts
 from secrets, installs poppler, lints, runs `npm run ship`, and rsyncs `dist/`
 to DreamHost. Roughly 45 seconds.
 
