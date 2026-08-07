@@ -88,6 +88,7 @@ If no phrase is a natural home for a term, say so and move on rather than forcin
 
 Both sides are **literal text, replaced everywhere they appear**.
 Prefer a distinctive phrase over a common word: replacing "design" would hit every occurrence on the resume.
+Pairs match longest first in a single pass, so a specific phrase beats a general one that contains it, but that is a tiebreak rather than a licence to be vague.
 
 ### 5. the title is the user's call
 
@@ -101,9 +102,10 @@ Recruiters do filter on titles, but a header that doesn't match someone's title 
 npm run docx
 ```
 
-The run reports how many rewords landed and flags any whose `-` side isn't in the resume.
+The run reports how many rewords landed, how many replacements each made, and flags any whose `-` side isn't in the resume.
 **A pair reported as unmatched did not apply.**
 Fix it or drop it, never leave it.
+A pair flagged for firing four or more times is too general; replace it with a longer phrase rather than leaving it.
 
 Then re-run the keyword check and give the before/after Top-10 number.
 If it didn't move, say so plainly.

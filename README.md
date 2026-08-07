@@ -188,7 +188,11 @@ title: Digital Design Lead
 
 `title:` carries the posting's title in the header for that application only.
 Each `-` / `+` pair is a literal find-and-replace across the resume's text, applied at render time.
+Pairs match longest first in a single pass, which lets a specific phrase beat a general one that contains it and stops any replacement from chewing through another's output.
 The scaffold arrives entirely commented out; generating it never changes an artifact until you uncomment something.
+
+Tailoring reaches the `.docx` and the keyword score.
+Nothing else: your PDF, the site, and your cover letters always render the core resume.
 
 Hand-edit it, or hand [RESUME-TAILOR.md](RESUME-TAILOR.md) to a coding agent to fill it in with approval on each pair.
 Delete the file and the application reverts completely, which is the property that makes tailoring safe to do casually.
@@ -197,11 +201,36 @@ A pair whose `-` side isn't in your resume gets **reported, not silently skipped
 That's the failure that would otherwise mean shipping a docx believing an edit landed:
 
 ```
-✓ …-Okta.docx  [creative] "Digital Design Lead"  +1 reword(s)
+✓ …-Okta.docx  [creative] "Digital Design Lead"  +1 reword(s), 2 replacement(s)
     ! "a phrase that is not in my resume" is not in your resume, not applied
 ```
 
 `npm run keywords` scores against the tailored version when a file exists, which makes the report reflect what the docx will actually contain.
+
+#### filling in the `-` side
+
+The scaffold writes the `+` side from the posting and leaves `-` blank, because only you know which of your words it should replace.
+Search the resume for the concept:
+
+```bash
+grep -o '"[^"]*design[^"]*"' src/data/resume.ts
+```
+
+Then paste your own wording after the `-`.
+It has to match character for character.
+Anything that doesn't gets reported rather than skipped.
+
+**Use the longest distinctive phrase you can.**
+Replacement is global, so a bare `design` hits every instance on the resume.
+The run reports how many times each pair fired and flags any that fired four or more times:
+
+```
+✓ …-Okta.docx  [creative] "Digital Design Lead"  +2 reword(s), 9 replacement(s)
+    ! "design" replaced 7x. Use a longer, more distinctive phrase
+```
+
+Two replacements from one pair reads right.
+Seven usually means the phrase was meant to be longer.
 
 The **missing** list stays manual on purpose, because those are claims rather than phrasings.
 

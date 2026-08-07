@@ -219,11 +219,11 @@ async function main() {
   const render = async (track, roleTitle, suffix, tailoring = null) => {
     const base = resolveResume(resume, track);
     // Tailoring layers onto the resolved copy; the core resume is never edited.
-    const { resume: resolved, unmatched } = applyTailoring(base, tailoring);
+    const { resume: resolved, applied, unmatched } = applyTailoring(base, tailoring);
     const title = roleTitle ?? tailoring?.title ?? resolved.role;
     const file = `${stem}-${suffix}.docx`;
     await writeDocx(buildDocument(resolved, title, formatRange), outDir, file);
-    written.push({ file, track, title, tailoring, unmatched });
+    written.push({ file, track, title, applied, unmatched });
     return file;
   };
 
@@ -331,13 +331,22 @@ async function main() {
 
 function report(written, stale, untitled = [], skipped = [], orphaned = []) {
   console.log("\nDOCX (single column, ATS upload copy):");
-  for (const { file, track, title, tailoring, unmatched } of written) {
-    const note = tailoring?.pairs.length
-      ? `  +${tailoring.pairs.length - (unmatched?.length ?? 0)} reword(s)`
+  for (const { file, track, title, applied, unmatched } of written) {
+    const hits = (applied ?? []).reduce((sum, pair) => sum + pair.count, 0);
+    const note = applied?.length
+      ? `  +${applied.length} reword(s), ${hits} replacement(s)`
       : "";
     console.log(`  ✓ ${file}  [${track}] "${title}"${note}`);
     for (const { from } of unmatched ?? []) {
       console.log(`      ! "${from}" is not in your resume, not applied`);
+    }
+    // A pair this broad is nearly always a phrase that was meant to be longer.
+    for (const { from, count } of applied ?? []) {
+      if (count >= 4) {
+        console.log(
+          `      ! "${from}" replaced ${count}x. Use a longer, more distinctive phrase`,
+        );
+      }
     }
   }
   for (const file of stale) {

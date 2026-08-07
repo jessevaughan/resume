@@ -95,25 +95,48 @@ function mapStrings(value, fn) {
 /**
  * Layer a tailoring file onto a resolved resume.
  *
- * Returns the new resume plus which pairs actually landed, so callers can
- * report a pair whose `from` no longer exists. That's the failure mode that would
- * otherwise mean you shipped a docx believing an edit applied.
+ * Returns the new resume plus which pairs landed and how many times each did.
+ * The count is the useful part: a pair that fired seven times is almost always
+ * too general to be what you meant, and a pair that fired zero times is an edit
+ * you think you made and didn't.
  */
 export function applyTailoring(resolved, tailoring) {
-  if (!tailoring) return { resume: resolved, applied: [], unmatched: [] };
+  if (!tailoring?.pairs.length) {
+    const base = tailoring?.title
+      ? { ...resolved, role: tailoring.title }
+      : resolved;
+    return { resume: base, applied: [], unmatched: [] };
+  }
+
+  // Longest `from` first, so a specific phrase beats a general one that
+  // contains it: "design systems" wins over a bare "design".
+  const ordered = [...tailoring.pairs].sort(
+    (a, b) => b.from.length - a.from.length,
+  );
+  const lookup = new Map(ordered.map((pair) => [pair.from, pair.to]));
+  const counts = new Map(ordered.map((pair) => [pair.from, 0]));
+  const escape = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const pattern = new RegExp(
+    ordered.map((pair) => escape(pair.from)).join("|"),
+    "g",
+  );
+
+  // One pass per string, so a replacement's output is never rescanned. Applying
+  // pairs one after another let them cascade: "design systems" became
+  // "digital design systems", and a later bare "design" pair then chewed
+  // through that into "digital digital design systems".
+  let resume = mapStrings(resolved, (text) =>
+    text.replace(pattern, (match) => {
+      counts.set(match, counts.get(match) + 1);
+      return lookup.get(match);
+    }),
+  );
 
   const applied = [];
   const unmatched = [];
-  let resume = resolved;
-
   for (const pair of tailoring.pairs) {
-    let hit = false;
-    resume = mapStrings(resume, (text) => {
-      if (!text.includes(pair.from)) return text;
-      hit = true;
-      return text.split(pair.from).join(pair.to);
-    });
-    (hit ? applied : unmatched).push(pair);
+    const count = counts.get(pair.from) ?? 0;
+    (count > 0 ? applied : unmatched).push({ ...pair, count });
   }
 
   if (tailoring.title) resume = { ...resume, role: tailoring.title };
