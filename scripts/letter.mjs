@@ -51,6 +51,7 @@ function buildDocument(letter, name, role, contact) {
   return makeDocument([
     body([text(name, { bold: true, size: 32 })], { spacing: { after: 40 } }),
     body([text(role, { size: 22 })], { spacing: { after: 40 } }),
+    body([text(contact.location, { size: 20 })], { spacing: { after: 40 } }),
     body([text(contactLine(contact, { email: letter.email }), { size: 20 })], {
       spacing: { after: 320 },
     }),

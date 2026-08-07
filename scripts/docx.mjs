@@ -132,6 +132,13 @@ function buildDocument(resume, roleTitle, formatRange) {
       alignment: AlignmentType.CENTER,
       spacing: { after: 40 },
     }),
+    // Location on its own line. Appended to the contact line it pushed past
+    // the measure and orphaned "CA" onto a line by itself.
+    new Paragraph({
+      children: [text(resume.contact.location, { size: 20 })],
+      alignment: AlignmentType.CENTER,
+      spacing: { after: 40 },
+    }),
     new Paragraph({
       children: [text(contactLine(resume.contact), { size: 20 })],
       alignment: AlignmentType.CENTER,

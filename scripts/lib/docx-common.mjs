@@ -26,9 +26,15 @@ export const slugify = (value) =>
     .replace(/\s+/g, "-");
 
 /**
- * Contact details as one line. URLs are spelled out rather than using the
- * site's short display forms: "in/jessesvaughan" is a design abbreviation,
- * "linkedin.com/in/jessesvaughan" is what a parser recognises as a profile.
+ * How to reach you, on one line: site, profile, email, phone.
+ *
+ * Location is deliberately left out and set on its own line by the caller.
+ * With it appended, the line ran 114 characters against a 6.5in measure and
+ * wrapped, orphaning "CA" onto a line of its own.
+ *
+ * URLs are spelled out rather than using the site's short display forms:
+ * "in/jessesvaughan" is a design abbreviation, "linkedin.com/in/jessesvaughan"
+ * is what a parser recognises as a profile.
  */
 export function contactLine(contact, { email } = {}) {
   const parts = [contact.site];
@@ -39,18 +45,21 @@ export function contactLine(contact, { email } = {}) {
         : contact.linkedin,
     );
   }
-  parts.push(email ?? contact.email, contact.phone, contact.location);
-  return parts.join("  |  ");
+  parts.push(email ?? contact.email, contact.phone);
+  return parts.join(" | ");
 }
 
 /**
- * Letter-size, no header or footer, one-inch margins (1440 twips).
+ * Letter-size, no header or footer.
  *
- * One inch rather than a half: the only reason to crowd the margins is fitting
- * more per page, and page count doesn't apply here (below). Half-inch margins
- * set a 7.5in measure, about 108 characters a line at this size, well past
- * the 45-90 that reads comfortably. An inch brings it to roughly 94 and makes
- * the file look like a normal Word document to whoever opens it.
+ * An inch on the sides, half an inch top and bottom. The inch is about
+ * measure: half-inch sides set a 7.5in line, about 108 characters at this
+ * size, well past the 45-90 that reads comfortably. An inch brings it to
+ * roughly 94 and makes the file look like a normal Word document.
+ *
+ * Vertical margins are a separate question and get a separate answer. Nothing
+ * about readability wants an inch of blank paper above the name, so the top
+ * and bottom are tighter and the content starts where a resume should.
  *
  * There is no page-count check anywhere for the .docx, on purpose: a .docx has
  * no pages until something lays it out, and Word, Google Docs, and each ATS
@@ -68,7 +77,7 @@ export const makeDocument = (children) =>
             // US Letter, stated explicitly: the docx library defaults to A4,
             // which silently hands a US applicant a European page size.
             size: { width: 12240, height: 15840 },
-            margin: { top: 1440, bottom: 1440, left: 1440, right: 1440 },
+            margin: { top: 720, bottom: 720, left: 1440, right: 1440 },
           },
         },
         children,
