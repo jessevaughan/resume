@@ -109,6 +109,7 @@
      room for the split-out early roles without cutting copy. */
   --masthead-pad: 7pt; /* below the masthead */
   --gap-name-role: 12pt; /* between name and role */
+  --gap-name-contact: 5pt; /* below the name, clears its descenders */
   --gap-section: 10pt; /* between sections */
   --gap-h2: 5pt; /* below a section heading */
   --gap-job: 10pt; /* between jobs; 2x --gap-bullet */
@@ -196,7 +197,9 @@ body {
 }
 
 .contact {
-  margin-top: 0;
+  /* Explicit, because --lh-display is tight enough that the name's descenders
+     hang below its line box. */
+  margin-top: var(--gap-name-contact);
   font-size: var(--fs-contact);
   color: var(--muted);
   /* Hold the contact line to the main column's measure so it aligns with the
