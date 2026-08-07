@@ -75,6 +75,7 @@
   --fs-h2: 12pt;
   --fs-role: 12pt;
   --fs-job-title: 10.5pt;
+  --fs-role-title: 9.5pt; /* a role nested under a company line */
   --fs-body: 8.75pt;
   --fs-small: 8pt;
   --fs-list: 7.5pt;
@@ -112,8 +113,9 @@
   --gap-name-contact: 5pt; /* below the name, clears its descenders */
   --gap-section: 10pt; /* between sections */
   --gap-h2: 5pt; /* below a section heading */
-  --gap-job: 10pt; /* between jobs; 2x --gap-bullet */
+  --gap-job: 9pt; /* between employers */
   --gap-job-title: 2pt; /* below a job title */
+  --gap-role: 4pt; /* between roles at one company */
   --gap-note: 3pt; /* around the functional-title note */
   --gap-lede: 5pt; /* below the job lede */
   --gap-bullet: 5pt; /* between main-column bullets */
@@ -162,13 +164,18 @@ body {
   }
 }
 
+/* positioning context for .avatar — keep off .masthead (PDF text order) */
+#root {
+  position: relative;
+}
+
 /* ---- masthead ---- */
 
 .masthead {
   padding-bottom: var(--masthead-pad);
-  position: relative;
 }
 
+/* anchored to #root */
 .avatar {
   position: absolute;
   top: 0;
@@ -265,14 +272,15 @@ section:last-child {
 
 .main li {
   padding-left: var(--bullet-indent);
-  position: relative;
   margin-bottom: var(--gap-bullet);
 }
 
+/* hanging bullet — in flow, not positioned (PDF text order) */
 .main li::before {
   content: "•";
-  position: absolute;
-  left: 0;
+  display: inline-block;
+  width: var(--bullet-indent);
+  margin-left: calc(-1 * var(--bullet-indent));
   color: var(--muted);
 }
 
@@ -284,11 +292,34 @@ section:last-child {
   margin-bottom: 0;
 }
 
+/* company line above grouped roles */
+.employer {
+  font-size: var(--fs-job-title);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-title);
+  margin-bottom: var(--gap-job-title);
+}
+
+.employer-role + .employer-role {
+  margin-top: var(--gap-role);
+}
+
 .job-title {
   font-size: var(--fs-job-title);
   font-weight: var(--fw-bold);
   line-height: var(--lh-title);
   margin-bottom: var(--gap-job-title);
+}
+
+/* nested under a company line, so a step down from it */
+.employer-role .job-title {
+  font-size: var(--fs-role-title);
+}
+
+.job-earlier {
+  font-size: var(--fs-small);
+  color: var(--muted);
+  margin-top: var(--gap-role);
 }
 
 .job-meta {

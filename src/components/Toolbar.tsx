@@ -29,19 +29,22 @@ export function Toolbar({
 }) {
   return (
     <div className="toolbar">
-      <div className="toolbar__tracks" role="group" aria-label="Resume track">
-        {TRACKS.map((t) => (
-          <button
-            key={t}
-            type="button"
-            className="toolbar__track"
-            aria-pressed={t === track}
-            onClick={() => onChange(t)}
-          >
-            {TRACK_LABELS[t]}
-          </button>
-        ))}
-      </div>
+      {/* One track has nothing to switch between. */}
+      {TRACKS.length > 1 && (
+        <div className="toolbar__tracks" role="group" aria-label="Resume track">
+          {TRACKS.map((t) => (
+            <button
+              key={t}
+              type="button"
+              className="toolbar__track"
+              aria-pressed={t === track}
+              onClick={() => onChange(t)}
+            >
+              {TRACK_LABELS[t]}
+            </button>
+          ))}
+        </div>
+      )}
 
       <span className="toolbar__rule" aria-hidden="true" />
 

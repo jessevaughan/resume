@@ -4,9 +4,11 @@
 // follow: the perTrack() calls in src/data/resume.ts. Also update the (not
 // type-checked) check config in scripts/pdf.mjs by hand.
 //
-// The whole app is built around two positionings, so the ergonomic
-// perTrack(a, b) helper takes exactly two values; a third track would mean
-// generalizing that helper.
+// One track is the normal case. Two positionings is a personal choice — mine —
+// not something the app requires: set TRACKS to a single entry, trim the
+// records below to match, and the switcher hides itself. perTrack() builds
+// from TRACKS, so it keeps working at any count (a single-track resume can
+// also just author plain values and never call it).
 
 export const TRACKS = ["creative", "engineering"] as const;
 

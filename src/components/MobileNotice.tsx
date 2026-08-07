@@ -39,23 +39,26 @@ export function MobileNotice({
           screen. The PDF works anywhere.
         </p>
 
-        <div
-          className="mobile-notice__tracks"
-          role="group"
-          aria-label="Resume track"
-        >
-          {TRACKS.map((t) => (
-            <button
-              key={t}
-              type="button"
-              className="mobile-notice__track"
-              aria-pressed={t === track}
-              onClick={() => onChange(t)}
-            >
-              {TRACK_LABELS[t]}
-            </button>
-          ))}
-        </div>
+        {/* One track has nothing to switch between. */}
+        {TRACKS.length > 1 && (
+          <div
+            className="mobile-notice__tracks"
+            role="group"
+            aria-label="Resume track"
+          >
+            {TRACKS.map((t) => (
+              <button
+                key={t}
+                type="button"
+                className="mobile-notice__track"
+                aria-pressed={t === track}
+                onClick={() => onChange(t)}
+              >
+                {TRACK_LABELS[t]}
+              </button>
+            ))}
+          </div>
+        )}
 
         <a className="mobile-notice__download" href={pdfHref(track)} download>
           <DownloadIcon />

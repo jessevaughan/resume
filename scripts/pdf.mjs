@@ -44,6 +44,10 @@ const NAME = "Jesse Vaughan";
 //   order          section labels that must appear in this sequence in the
 //                  extracted text. This is the ATS reading-order guarantee
 //                  (main column before the sidebar). Edit to your headings.
+//                  Lead with the name and the contact line: section headings
+//                  alone can't catch a masthead that has slipped down the
+//                  stream, because they all move together. See the note on
+//                  #root in resume.css for how that happens.
 //   mustContain    keywords the track must include. Optional; [] to skip.
 //   mustNotContain keywords the track must NOT include, e.g. content you
 //                  deliberately keep off this track. Optional; [] to skip.
@@ -52,6 +56,8 @@ const TRACKS = [
     id: "creative",
     name: "Creative-Brand-Leader",
     order: [
+      "Jesse Vaughan",
+      "hello@jessevaughan.com",
       "Summary",
       "Career Highlights",
       "Experience",
@@ -69,6 +75,8 @@ const TRACKS = [
     id: "engineering",
     name: "Engineer-Web-Architect",
     order: [
+      "Jesse Vaughan",
+      "hello@jessevaughan.com",
       "Summary",
       "Career Highlights",
       "Experience",
@@ -217,7 +225,7 @@ function checkLetters(files) {
       console.log(`  ✓ ${file}: one page`);
     } else {
       ok = false;
-      console.error(`  ✗ ${file}: ${pages} pages — cut copy, don't shrink type`);
+      console.error(`  ✗ ${file}: ${pages} pages. Cut copy, don't shrink type`);
     }
   }
   return ok;
@@ -226,7 +234,7 @@ function checkLetters(files) {
 function checkAts() {
   if (!hasPdftotext()) {
     console.warn(
-      "\n⚠ pdftotext not found — skipping the ATS text check. PDFs were still generated.\n" +
+      "\n⚠ pdftotext not found. Skipping the ATS text check. PDFs were still generated.\n" +
         "  Install poppler (brew install poppler) to re-prove reading order and keywords.",
     );
     return true;
@@ -296,5 +304,5 @@ try {
 const atsOk = checkAts();
 const lettersOk = checkLetters(letterFiles);
 const ok = atsOk && lettersOk;
-console.log(ok ? "\nDone." : "\nFAILED — see problems above.");
+console.log(ok ? "\nDone." : "\nFAILED. See problems above.");
 process.exit(ok ? 0 : 1);

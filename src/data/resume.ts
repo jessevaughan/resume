@@ -39,114 +39,148 @@ export const resume: ResumeData = {
 
   experience: [
     {
-      title: "Head of Creative - Marketing",
       company: "AdRoll (NextRoll)",
-      dates: "2022–2026",
-      lede: perTrack(
-        // creative
-        `Owned creative and brand strategy for a global SaaS marketing organization, from vision and narrative to the design systems that let it scale.`,
-        // engineering
-        `Owned and architected the web platform for a global SaaS marketing org, and led the creative and brand behind it.`,
-      ),
-      // It was dumb to keep these different so temporarily placing them in the same place before re-wiring
-      note: {
-        text: "Functional title. Title of record is Senior Manager, Creative.",
-        placement: perTrack("top", "top"),
+      roles: [
+      {
+        title: "Head of Creative - Marketing",
+        start: { year: 2022, month: 2 },
+        end: { year: 2026, month: 6 },
+        lede: perTrack(
+          // creative
+          `Owned creative and brand strategy for a global SaaS marketing organization, from vision and narrative to the design systems that let it scale.`,
+          // engineering
+          `Owned and architected the web platform for a global SaaS marketing org, and led the creative and brand behind it.`,
+        ),
+        // It was dumb to keep these different so temporarily placing them in the same place before re-wiring
+        note: {
+          text: "Functional title. Title of record is Senior Manager, Creative.",
+          placement: perTrack("top", "top"),
+        },
+        bullets: perTrack(
+          // creative
+          [
+            `Directed the 2025 consolidation of AdRoll and RollWorks into a single brand, from identity and messaging systems through a full site migration. In the first 60 days, +87% first-time visitors, +42% homepage traffic, zero brand-confusion tickets.`,
+            `Built and led a distributed creative team of up to seven across the US, spanning design, web, video, and copy.`,
+            `Set creative and brand strategy with the CMO, VP of Marketing, and brand leadership. Shaped company-wide direction with the executive team.`,
+            `Owned web platform performance and reliability, resolving a live DDoS attack on production.`,
+            `Built an AI-assisted workflow with Claude Code to turn templated site sections into CMS-editable entries. It retired a standing queue of copy/paste tickets and moved routine edits to self-serve.`,
+            `Founding board member of RollAsia (2018–2026), the company's Asian and Pacific Islander employee resource group. Built and hosted company-wide programming and speaker events.`,
+          ],
+          // engineering
+          [
+            `Owned the architecture and ongoing development of adroll.com, a flat-file Statamic build with page templates, reusable modules, and an editorial system that let marketing ship edits without engineering.`,
+            `Built an AI-assisted workflow with Claude Code to convert hardcoded template sections into CMS-editable entries. It retired a standing queue of copy/paste tickets and moved routine content edits to self-serve.`,
+            `Led the site migration behind the 2025 AdRoll–RollWorks brand consolidation. First-time visitors rose 87% and homepage traffic 42% in the first 60 days.`,
+            `Led incident response during a Super Bowl traffic surge and DDoS attack, scaling servers to absorb the load while devops blocked the attacking IP ranges. Then built a standing bot blocklist into Fastly with devops so the next one ran without a scramble.`,
+            `Led creative for the marketing org and a team of up to seven.`,
+          ],
+        ),
       },
-      bullets: perTrack(
-        // creative
-        [
-          `Directed the 2025 consolidation of AdRoll and RollWorks into a single brand, from identity and messaging systems through a full site migration. In the first 60 days, +87% first-time visitors, +42% homepage traffic, zero brand-confusion tickets.`,
-          `Built and led a distributed creative team of up to seven across the US, spanning design, web, video, and copy.`,
-          `Set creative and brand strategy with the CMO, VP of Marketing, and brand leadership. Shaped company-wide direction with the executive team.`,
-          `Owned web platform performance and reliability, resolving a live DDoS attack on production.`,
-          `Built an AI-assisted workflow with Claude Code to turn templated site sections into CMS-editable entries. It retired a standing queue of copy/paste tickets and moved routine edits to self-serve.`,
-          `Founding board member of RollAsia (2018–2026), the company's Asian and Pacific Islander employee resource group. Built and hosted company-wide programming and speaker events.`,
-        ],
-        // engineering
-        [
-          `Owned the architecture and ongoing development of adroll.com, a flat-file Statamic build with page templates, reusable modules, and an editorial system that let marketing ship edits without engineering.`,
-          `Built an AI-assisted workflow with Claude Code to convert hardcoded template sections into CMS-editable entries. It retired a standing queue of copy/paste tickets and moved routine content edits to self-serve.`,
-          `Led the site migration behind the 2025 AdRoll–RollWorks brand consolidation. First-time visitors rose 87% and homepage traffic 42% in the first 60 days.`,
-          `Led incident response during a Super Bowl traffic surge and DDoS attack, scaling servers to absorb the load while devops blocked the attacking IP ranges. Then built a standing bot blocklist into Fastly with devops so the next one ran without a scramble.`,
-          `Led creative for the marketing org and a team of up to seven.`,
-        ],
-      ),
+      {
+        title: "Manager II, Creative - Marketing",
+        start: { year: 2020, month: 2 },
+        end: { year: 2022, month: 1 },
+        bullets: perTrack(
+          // creative
+          [
+            `Directed creative across integrated brand and acquisition campaigns.`,
+            `Built brand systems that held up as the company grew. Strengthened the creative-review culture, unifying brand expression across product marketing and web.`,
+          ],
+          // engineering
+          [
+            `Maintained and evolved the core Statamic build and web design system, and set the front-end standard for the team, while directing creative.`,
+          ],
+        ),
+      },
+      {
+        title: "Manager, Creative - Marketing",
+        start: { year: 2018, month: 2 },
+        end: { year: 2020, month: 1 },
+        bullets: perTrack(
+          // creative
+          [
+            `Took over the full creative team after the head of creative departed, becoming hiring manager and leading direction across design, web, and video.`,
+            `Hired and mentored across design and web, coaching a designer/developer who has since built a UI/UX career.`,
+          ],
+          // engineering
+          [
+            `Took over the full creative team as hiring manager while continuing to own the web build. Mentored a designer/developer through technical projects and review, and they have since built a career in UI/UX design.`,
+          ],
+        ),
+      },
+      {
+        title: "Team Lead, Web Design - Marketing",
+        start: { year: 2017, month: 2 },
+        end: { year: 2018, month: 1 },
+        // Creative is the space-constrained track at one page, so this role goes
+        // title-only there (its neighbors already are). Engineering has the room
+        // and keeps the line.
+        bullets: perTrack(
+          [],
+          ["First direct report while still owning the web platform hands-on."],
+        ),
+      },
+      // The early IC years, split into real dated entries rather than one
+      // lumped "Earlier" block. Titles are the ones on LinkedIn. Kept
+      // title-only: the substance (the Statamic/ExpressionEngine rebuilds, the
+      // Drupal migration, Smartling) already lives in Career Highlights, so
+      // bullets here would just duplicate it.
+      {
+        title: "Web Designer - Marketing",
+        // Months here (and on OneLogin below) disambiguate the Nov 2014 handoff
+        // so the two don't both read as a bare, overlapping "2014".
+        start: { year: 2014, month: 11 },
+        end: { year: 2017, month: 1 },
+        bullets: perTrack([], []),
+      },
+      ],
     },
     {
-      title: "Manager II, Creative - Marketing",
-      company: "AdRoll (NextRoll)",
-      dates: "2020–2022",
-      bullets: perTrack(
-        // creative
-        [
-          `Directed creative across integrated brand and acquisition campaigns.`,
-          `Built brand systems that held up as the company grew. Strengthened the creative-review culture, unifying brand expression across product marketing and web.`,
-        ],
-        // engineering
-        [
-          `Maintained and evolved the core Statamic build and web design system, and set the front-end standard for the team, while directing creative.`,
-        ],
-      ),
-    },
-    {
-      title: "Manager, Creative - Marketing",
-      company: "AdRoll (NextRoll)",
-      dates: "2018–2020",
-      bullets: perTrack(
-        // creative
-        [
-          `Took over the full creative team after the head of creative departed, becoming hiring manager and leading direction across design, web, and video.`,
-          `Hired and mentored across design and web, coaching a designer/developer who has since built a UI/UX career.`,
-        ],
-        // engineering
-        [
-          `Took over the full creative team as hiring manager while continuing to own the web build. Mentored a designer/developer through technical projects and review, and they have since built a career in UI/UX design.`,
-        ],
-      ),
-    },
-    {
-      title: "Team Lead, Web Design - Marketing",
-      company: "AdRoll (NextRoll)",
-      dates: "2017–2018",
-      // Creative is the space-constrained track at one page, so this role goes
-      // title-only there (its neighbors already are). Engineering has the room
-      // and keeps the line.
-      bullets: perTrack(
-        [],
-        ["First direct report while still owning the web platform hands-on."],
-      ),
-    },
-    // The early IC years, split into real dated entries rather than one
-    // lumped "Earlier" block. Titles are the ones on LinkedIn. Kept
-    // title-only: the substance (the Statamic/ExpressionEngine rebuilds, the
-    // Drupal migration, Smartling) already lives in Career Highlights, so
-    // bullets here would just duplicate it.
-    {
-      title: "Web Designer - Marketing",
-      company: "AdRoll",
-      // Months here (and on OneLogin below) disambiguate the Nov 2014 handoff
-      // so the two don't both read as a bare, overlapping "2014".
-      dates: "Nov 2014–2017",
-      bullets: perTrack([], []),
-    },
-    {
-      title: "Web Developer & Designer - Marketing",
       company: "OneLogin",
-      dates: "Jan–Nov 2014",
-      bullets: perTrack([], []),
+      roles: [
+      {
+        title: "Web Developer & Designer - Marketing",
+        start: { year: 2014, month: 1 },
+        end: { year: 2014, month: 11 },
+        bullets: perTrack([], []),
+      },
+      ],
     },
     {
-      title: "Web Developer & Designer - Marketing",
       company: "Selectica",
-      dates: "Mar–Dec 2013",
-      bullets: perTrack([], []),
+      roles: [
+      {
+        title: "Web Developer & Designer - Marketing",
+        start: { year: 2013, month: 3 },
+        end: { year: 2013, month: 12 },
+        bullets: perTrack([], []),
+      },
+      ],
     },
     {
-      title: "Senior Web Designer & Developer",
       company: "Visual Data Systems",
-      dates: "2009–Feb 2013",
-      bullets: perTrack([], []),
+      roles: [
+      {
+        title: "Senior Web Designer & Developer",
+        start: { year: 2011, month: 2 },
+        end: { year: 2013, month: 2 },
+        bullets: perTrack([], []),
+      },
+      ],
+      // Tenure only: these keep the earliest date at Dec 2009, which is what
+      // makes the "sixteen years" claim add up to a parser doing the math.
+      earlier: [
+        {
+          title: "Web Designer & Developer",
+          start: { year: 2010, month: 3 },
+          end: { year: 2011, month: 1 },
+        },
+        {
+          title: "Web Design & Development Intern",
+          start: { year: 2009, month: 12 },
+          end: { year: 2010, month: 2 },
+        },
+      ],
     },
   ],
 

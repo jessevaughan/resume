@@ -21,6 +21,15 @@ pnpm-debug.log*
 # Generated PDFs embed the licensed fonts - keep them out of the repo
 /pdfs/
 
+# Generated .docx upload copies - per-application, same as the PDFs
+/docx/
+
+# Pasted job postings for the keyword check - per-application
+/postings/
+
+# Per-application wording overrides (see scripts/lib/tailoring.mjs)
+/tailored/
+
 # Per-application cover letter content (see src/data/letters.ts)
 /src/data/letters/
 

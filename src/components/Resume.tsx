@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import type { ResolvedResume } from '../resume-schema'
 import { Masthead } from './Masthead'
 import { Section } from './Section'
-import { RoleItem } from './RoleItem'
+import { EmployerItem } from './EmployerItem'
 import { SkillGroup } from './SkillGroup'
 import { hyphenSafe } from './hyphenSafe'
 
@@ -36,8 +36,8 @@ export function Resume({ resume }: { resume: ResolvedResume }) {
           </Section>
 
           <Section title="Experience">
-            {resume.experience.map((job, i) => (
-              <RoleItem key={i} job={job} />
+            {resume.experience.map((employer, i) => (
+              <EmployerItem key={i} employer={employer} />
             ))}
           </Section>
         </main>
