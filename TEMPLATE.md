@@ -163,6 +163,7 @@ npm run pdf
 
 This builds the app and screenshots it through headless Chrome into `pdfs/`, all locally.
 Nothing is served or deployed.
+The PDF always renders the core resume: per-application tailoring reaches the `.docx` and the keyword score only, never this.
 Edit the config block at the top of [`scripts/pdf.mjs`](scripts/pdf.mjs): set `NAME`, and per track the `order` (text that must extract in reading order) plus optional `mustContain` / `mustNotContain` checks.
 **Leave the keyword arrays empty to skip them**; the reading-order check still runs.
 Install `poppler` (`brew install poppler`) to run it locally.

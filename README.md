@@ -193,6 +193,7 @@ The scaffold arrives entirely commented out; generating it never changes an arti
 
 Tailoring reaches the `.docx` and the keyword score.
 Nothing else: your PDF, the site, and your cover letters always render the core resume.
+There is no way to get a tailored PDF out of this pipeline, which is [covered below](#6-the-designed-pdf-optional).
 
 Hand-edit it, or hand [RESUME-TAILOR.md](RESUME-TAILOR.md) to a coding agent to fill it in with approval on each pair.
 Delete the file and the application reverts completely, which is the property that makes tailoring safe to do casually.
@@ -309,6 +310,11 @@ npm run pdf
 
 This builds the app and screenshots it through headless Chrome into `pdfs/`, all locally.
 Nothing is served or deployed; the site is the PDF's rendering engine, not a destination.
+
+**The PDF always renders the core resume.**
+Per-application tailoring never reaches it, because the PDF comes from the web app and the app has no idea `tailored/` exists.
+If a posting wants a tailored resume as a PDF, send the `.docx` instead, which is the better upload anyway.
+If the reword is genuinely a better way to describe the work, promote it into [`src/data/resume.ts`](src/data/resume.ts) and every artifact picks it up.
 
 It then re-proves the reading guarantee with `pdftotext`: text extracts in logical order, name and contact first.
 Install `poppler` (`brew install poppler`) for the check.
