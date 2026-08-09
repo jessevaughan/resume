@@ -1,8 +1,8 @@
 import { Fragment, type ReactNode } from "react";
 import { siteHref, linkedinHref, type Contact } from "../resume-schema";
 
-// ensp / ensp, matching my hand-built contact line's spacing.
-const CONTACT_SEP = " / ";
+// Middot, spaced. Plain spaces on both sides so pdftotext still sees word gaps.
+const CONTACT_SEP = " · ";
 
 /**
  * External links open in a new tab so a recruiter reading the web version
