@@ -120,6 +120,7 @@
   --gap-lede: 5pt; /* below the job lede */
   --gap-bullet: 5pt; /* between main-column bullets */
   --bullet-indent: 11pt; /* hanging indent for bullets */
+  --fs-bullet-min: 8.25pt; /* marker floor — see the note on .main li::before */
   --gap-skill-group: 9pt; /* between skill groups */
   --gap-skill-heading: 1pt; /* below a skill-group heading */
 }
@@ -282,6 +283,10 @@ section:last-child {
   width: var(--bullet-indent);
   margin-left: calc(-1 * var(--bullet-indent));
   color: var(--muted);
+  /* marker floor — pdftotext splits the run past a 1em gap (PDF text order);
+     line-height 0 keeps the taller marker out of the line box */
+  font-size: max(1em, var(--fs-bullet-min));
+  line-height: 0;
 }
 
 .job {

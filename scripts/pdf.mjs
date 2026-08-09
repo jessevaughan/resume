@@ -66,8 +66,13 @@ const TRACKS = [
     ],
     mustContain: [
       "Creative & Brand Leader",
-      "#DareToGrow",
-      "zero brand-confusion tickets",
+      "AdRoll",
+      "Head of Creative",
+      "Senior Manager, Creative",
+      "Creative Leadership",
+      "creative direction",
+      "design systems",
+      "CMS architecture and migration",
     ],
     mustNotContain: ["Statamic", "Laravel"], // creative stays generic on the named stack
   },
@@ -85,9 +90,18 @@ const TRACKS = [
     ],
     mustContain: [
       "Design Engineer",
+      "Web Architect",
+      "AdRoll",
       "Statamic",
-      "Super Bowl traffic surge and DDoS",
-      "$3,600",
+      "Laravel",
+      "React",
+      "GitHub Actions",
+      "Cloudflare",
+      "Fastly",
+      "localization",
+      "incident response",
+      "DDoS",
+      "JavaScript",
     ],
     mustNotContain: ["#DareToGrow", "brand-confusion"], // DareToGrow never on engineering
   },
@@ -278,6 +292,19 @@ function checkAts() {
     for (const kw of mustNotContain) {
       if (text.includes(strip(kw)))
         problems.push(`leaked keyword "${kw}" (guardrail)`);
+    }
+
+    // Every bullet marker must extract on the same line as its text. A marker
+    // stranded on its own line means the gap to the text passed pdftotext's
+    // 1em run-splitting threshold — see --fs-bullet-min in resume.css.
+    const { stdout: laidOut } = spawnSync("pdftotext", [pdfPath, "-"], {
+      encoding: "utf8",
+    });
+    const orphans = laidOut
+      .split("\n")
+      .filter((line) => line.trim() === "•").length;
+    if (orphans > 0) {
+      problems.push(`${orphans} bullet markers split from their text`);
     }
 
     if (problems.length === 0) {
