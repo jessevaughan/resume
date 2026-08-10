@@ -72,7 +72,7 @@ export const resume: ResumeData = {
             `Built an AI-assisted workflow with Claude Code to convert hardcoded template sections into CMS-editable entries. Retired a standing copy/paste ticket queue and moved routine edits to self-serve.`,
             `Built tooling for teams using AI assistants, with skills carrying brand voice and standards for where AI belonged.`,
             `Led the site migration behind the 2025 AdRoll–RollWorks brand consolidation, porting RollWorks content into the existing adroll.com build and retiring rollworks.com to a redirect.`,
-            `Responded to the 2023 Super Bowl DDoS alongside security and ops, scaling servers to absorb the flood before devops blocked the offending IP ranges. Then built a standing bot blocklist into Fastly.`,
+            `Responded to the 2023 Super Bowl DDoS alongside security and ops, scaling servers to absorb the flood before devops blocked the offending IP ranges. Then built a standing bot blocklist into Fastly with devops.`,
             `Hired web designers and developers to carry day-to-day site work, and kept ownership and my hands in the code.`,
           ],
         ),

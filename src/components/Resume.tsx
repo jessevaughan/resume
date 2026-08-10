@@ -28,7 +28,7 @@ export function Resume({ resume }: { resume: ResolvedResume }) {
           </Section>
 
           <Section title="Career Highlights">
-            <ul>
+            <ul className="highlights">
               {resume.highlights.map((item, i) => (
                 <li key={i}>{hyphenSafe(item)}</li>
               ))}

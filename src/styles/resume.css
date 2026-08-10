@@ -80,6 +80,7 @@
   --fs-role-title: 9.5pt; /* a role nested under a company line */
   --fs-body: 8.75pt;
   --fs-small: 8pt;
+  --fs-highlight: 8.25pt; /* split from --fs-body, to sit nearer --fs-list */
   --fs-list: 7.5pt;
   --fs-contact: 8.25pt; /* The contact line is held to the main column's measure
                            and must stay ONE line: lengthen it (e.g. spell out
@@ -121,10 +122,10 @@
   --gap-h2: 5pt; /* below a section heading */
   --gap-job: 10pt; /* between employers */
   --gap-job-title: 2pt; /* below a job title */
-  --gap-role: 4pt; /* between roles at one company */
+  --gap-role: 9pt; /* between roles at one company; must clear --gap-bullet */
   --gap-note: 3pt; /* around the functional-title note */
   --gap-lede: 5pt; /* below the job lede */
-  --gap-bullet: 5.75pt; /* between main-column bullets */
+  --gap-bullet: 5pt; /* between main-column bullets; stays under --gap-role */
   --bullet-indent: 11pt; /* hanging indent for bullets */
   --fs-bullet-min: 8.25pt; /* marker floor — see the note on .main li::before */
   --gap-skill-group: 9pt; /* between skill groups */
@@ -297,6 +298,12 @@ section:last-child {
   list-style: none;
 }
 
+/* Career Highlights sat at --fs-body, a 1.25pt step above the experience
+   bullets, which made Experience read as fine print next to it. */
+.highlights {
+  font-size: var(--fs-highlight);
+}
+
 .main li {
   padding-left: var(--bullet-indent);
   margin-bottom: var(--gap-bullet);
@@ -419,8 +426,9 @@ section:last-child {
    too. */
 
 body[data-track="engineering"] {
-  --gap-bullet: 4.75pt;
+  --gap-bullet: 4.25pt;
   --gap-job: 9pt;
+  --gap-role: 8pt;
 }
 
 /* ---- print ---- */
