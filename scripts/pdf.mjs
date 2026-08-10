@@ -245,6 +245,27 @@ function checkLetters(files) {
   return ok;
 }
 
+// Same rule as the letters, and the one the ATS check can't see: reading order
+// and keywords both stay green on a two-page build, so page count needs its own
+// assertion. Past one page, cut copy — the type sizes are already at the floor.
+function checkResumes() {
+  console.log("\nResumes (one page per track):");
+  let ok = true;
+  for (const { name } of TRACKS) {
+    const file = fileFor(name);
+    const pages = pageCount(join(outDir, file));
+    if (pages === null) {
+      console.log(`  – ${file}: install poppler to verify page count`);
+    } else if (pages === 1) {
+      console.log(`  ✓ ${file}: one page`);
+    } else {
+      ok = false;
+      console.error(`  ✗ ${file}: ${pages} pages. Cut copy, don't shrink type`);
+    }
+  }
+  return ok;
+}
+
 function checkAts() {
   if (!hasPdftotext()) {
     console.warn(
@@ -329,7 +350,8 @@ try {
 }
 // Evaluate both before deciding, so one failure doesn't hide the other.
 const atsOk = checkAts();
+const resumesOk = checkResumes();
 const lettersOk = checkLetters(letterFiles);
-const ok = atsOk && lettersOk;
+const ok = atsOk && resumesOk && lettersOk;
 console.log(ok ? "\nDone." : "\nFAILED. See problems above.");
 process.exit(ok ? 0 : 1);
