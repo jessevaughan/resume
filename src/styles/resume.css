@@ -68,7 +68,9 @@
   --ui-muted: #635d4e; /* app chrome only (toolbar, mobile notice) */
   --rule: #d9d9d9; /* hairlines */
   --accent: #0032ff;
-  --paper: #fafafa;
+  --paper: #fafafa; /* canvas behind the page */
+  --bg-dot: rgba(17, 17, 17, 0.05); /* canvas halftone */
+  --bg-tint: rgba(0, 50, 255, 0.03); /* canvas corner wash */
 
   /* type scale */
   --fs-name: 38pt;
@@ -94,6 +96,10 @@
   --ls-name: -0.01em;
   --ls-h2: 0.06em;
 
+  /* word spacing — see the note on body */
+  --ws-body: 0.03em;
+  --ws-name: 0.08em; /* the display face's space is narrower still */
+
   /* line height */
   --lh-body: 1.38;
   --lh-list: 1.38;
@@ -113,12 +119,12 @@
   --gap-name-contact: 5pt; /* below the name, clears its descenders */
   --gap-section: 10pt; /* between sections */
   --gap-h2: 5pt; /* below a section heading */
-  --gap-job: 9pt; /* between employers */
+  --gap-job: 10pt; /* between employers */
   --gap-job-title: 2pt; /* below a job title */
   --gap-role: 4pt; /* between roles at one company */
   --gap-note: 3pt; /* around the functional-title note */
   --gap-lede: 5pt; /* below the job lede */
-  --gap-bullet: 5pt; /* between main-column bullets */
+  --gap-bullet: 5.75pt; /* between main-column bullets */
   --bullet-indent: 11pt; /* hanging indent for bullets */
   --fs-bullet-min: 8.25pt; /* marker floor — see the note on .main li::before */
   --gap-skill-group: 9pt; /* between skill groups */
@@ -150,6 +156,13 @@ body {
   line-height: var(--lh-body);
   letter-spacing: var(--ls-body);
   color: var(--ink);
+  /* pdftotext throws away space characters and re-infers word breaks from the
+     gap between glyphs, measured against each font's nominal advance widths.
+     Kerning makes the real advances narrower than nominal, so tight pairs put
+     that gap under its threshold and the space vanished from the text layer:
+     "Jesse Vaughan" extracted as "JesseVaughan". This holds every gap clear of
+     it without touching kerning. Asserted in scripts/pdf.mjs. */
+  word-spacing: var(--ws-body);
   background: #fff;
   width: 8.5in;
   min-height: 11in;
@@ -157,8 +170,20 @@ body {
   padding: var(--page-pad);
 }
 
-/* on screen, hint at the page edge */
+/* on screen, the canvas behind the page and a hint at the page edge */
 @media screen {
+  html {
+    min-height: 100dvh;
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle, var(--bg-dot) 0.6px, transparent 0.85px),
+      radial-gradient(120% 100% at 10% 0%, var(--bg-tint), transparent 55%);
+    background-size:
+      4px 4px,
+      auto;
+    background-repeat: repeat, no-repeat; /* dots tile, wash does not */
+  }
+
   body {
     box-shadow: 0 0 0 1px var(--rule);
     margin: 24px auto;
@@ -197,6 +222,7 @@ body {
   font-weight: var(--fw-light);
   line-height: var(--lh-display);
   letter-spacing: var(--ls-name);
+  word-spacing: var(--ws-name);
 }
 
 .role {
@@ -393,8 +419,8 @@ section:last-child {
    too. */
 
 body[data-track="engineering"] {
-  --gap-bullet: 4pt;
-  --gap-job: 8pt;
+  --gap-bullet: 4.75pt;
+  --gap-job: 9pt;
 }
 
 /* ---- print ---- */

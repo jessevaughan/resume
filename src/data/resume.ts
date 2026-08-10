@@ -26,7 +26,7 @@ export const resume: ResumeData = {
     // creative
     [
       `Led creative through three company-wide brand transformations, including a 2018 rebrand developed with the CEO and C-suite, a 2019 refresh and website rebuild, and the 2025 consolidation of two brands into one. Credited as Creative Director on the 2019 and 2025 work. Defined the visual and messaging systems marketing ran on.`,
-      `Led creative direction on #DareToGrow, a brand campaign with 15 documentary-style customer videos across a global omnichannel program. It ran during a period when the company saw +65% account signups and +95% site traffic.`,
+      `Led creative direction on #DareToGrow, a brand campaign with 15 documentary-style customer videos. It ran during a period when the company saw +65% account signups and +95% site traffic.`,
       `Promoted from web designer to Head of Creative across twelve years at AdRoll, and stayed hands-on in the web platform I architected and owned.`,
     ],
     // engineering
@@ -62,7 +62,7 @@ export const resume: ResumeData = {
             `Directed the 2025 consolidation of AdRoll and RollWorks into a single brand, from the Organic Intelligence brand mood through brand architecture, messaging systems, and a full site migration. The guidelines became the company's source of truth for brand decisions.`,
             `Built and led a distributed creative team of up to seven across the US, spanning design, web, video, and copy.`,
             `Set creative strategy with the CMO, VP of Marketing, and brand leadership.`,
-            `Built an AI-assisted workflow with Claude Code to turn templated site sections into CMS-editable entries. It retired a standing queue of copy/paste tickets and moved routine edits to self-serve.`,
+            `Built an AI-assisted workflow with Claude Code to turn templated site sections into CMS-editable entries. It retired a standing copy/paste ticket queue and moved routine edits to self-serve.`,
             `Built AI skills carrying the brand voice for the team, and set standards for where AI belonged.`,
             `Founding board member of RollAsia (2018–2026), the company's Asian and Pacific Islander employee resource group. Built and hosted company-wide programming and speaker events.`,
           ],
@@ -72,7 +72,7 @@ export const resume: ResumeData = {
             `Built an AI-assisted workflow with Claude Code to convert hardcoded template sections into CMS-editable entries. Retired a standing copy/paste ticket queue and moved routine edits to self-serve.`,
             `Built tooling for teams using AI assistants, with skills carrying brand voice and standards for where AI belonged.`,
             `Led the site migration behind the 2025 AdRoll–RollWorks brand consolidation, porting RollWorks content into the existing adroll.com build and retiring rollworks.com to a redirect.`,
-            `Led incident response during a Super Bowl traffic surge and DDoS attack, scaling servers to absorb the load while devops blocked the attacking IP ranges. Then built a standing bot blocklist into Fastly with devops.`,
+            `Responded to the 2023 Super Bowl DDoS alongside security and ops, scaling servers to absorb the flood before devops blocked the offending IP ranges. Then built a standing bot blocklist into Fastly.`,
             `Hired web designers and developers to carry day-to-day site work, and kept ownership and my hands in the code.`,
           ],
         ),

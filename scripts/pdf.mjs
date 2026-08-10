@@ -65,6 +65,7 @@ const TRACKS = [
       "Education",
     ],
     mustContain: [
+      "Jesse Vaughan",
       "Creative & Brand Leader",
       "AdRoll",
       "Head of Creative",
@@ -89,6 +90,7 @@ const TRACKS = [
       "Education",
     ],
     mustContain: [
+      "Jesse Vaughan",
       "Design Engineer",
       "Web Architect",
       "AdRoll",
@@ -291,27 +293,30 @@ function checkAts() {
       ok = false;
       continue;
     }
-    // Strip ALL whitespace from both the text and the search terms. raw
-    // output wraps lines and sometimes drops inter-word spaces (e.g.
-    // "Super Bowl" -> "SuperBowl"), so anything less is brittle. Order and
-    // substring semantics are preserved.
-    const strip = (s) => s.replace(/\s+/g, "");
-    const text = strip(stdout);
+    // Collapse whitespace to single spaces; don't remove it. raw output wraps
+    // lines, so a phrase can span a break and the runs need flattening — but
+    // the spaces themselves have to survive the comparison. Stripping them
+    // made every assertion below blind to word boundaries, which is how a PDF
+    // whose text layer read "JesseVaughan" passed this check for months. The
+    // dropped spaces it was working around were the bug now fixed by
+    // word-spacing in resume.css, not something to normalise away.
+    const norm = (s) => s.replace(/\s+/g, " ").trim();
+    const text = norm(stdout);
     const problems = [];
 
     // logical reading order: each anchor appears after the previous one
     let last = -1;
     for (const anchor of order) {
-      const at = text.indexOf(strip(anchor));
+      const at = text.indexOf(norm(anchor));
       if (at === -1) problems.push(`missing section "${anchor}"`);
       else if (at < last) problems.push(`section "${anchor}" out of order`);
       else last = at;
     }
     for (const kw of mustContain) {
-      if (!text.includes(strip(kw))) problems.push(`missing keyword "${kw}"`);
+      if (!text.includes(norm(kw))) problems.push(`missing keyword "${kw}"`);
     }
     for (const kw of mustNotContain) {
-      if (text.includes(strip(kw)))
+      if (text.includes(norm(kw)))
         problems.push(`leaked keyword "${kw}" (guardrail)`);
     }
 
