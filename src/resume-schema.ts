@@ -207,6 +207,20 @@ export interface Education {
   school: string;
 }
 
+/**
+ * An award or a placement on a shortlist. `level` is its own field rather than
+ * part of a display string, because it's the part that changes when a
+ * shortlist resolves. "Finalist" becomes "Silver" and no punctuation moves.
+ * `project` is optional because only the .docx prints it; in the app the
+ * sidebar sits beside the experience that already names the work.
+ */
+export interface Recognition {
+  program: string;
+  level: string;
+  category: string;
+  project?: string;
+}
+
 export interface ResumeData {
   name: string;
   role: Tracked<string>;
@@ -219,6 +233,12 @@ export interface ResumeData {
     groups: Tracked<SkillGroup[]>;
   };
   education: Education;
+  /**
+   * Optional in the authoring shape, since a resume with nothing to list
+   * shouldn't have to author an empty array and the template ships without
+   * one. Resolves to [] so components test length instead of existence.
+   */
+  recognition?: Tracked<Recognition[]>;
 }
 
 // ---- resolved shape (what components consume) ----
@@ -274,6 +294,7 @@ export interface ResolvedResume {
     groups: SkillGroup[];
   };
   education: Education;
+  recognition: Recognition[];
 }
 
 /** Sortable key, so span math never parses a formatted string. */
@@ -350,5 +371,7 @@ export function resolveResume(data: ResumeData, track: Track): ResolvedResume {
       groups: resolve(data.skills.groups, track),
     },
     education: data.education,
+    recognition:
+      data.recognition === undefined ? [] : resolve(data.recognition, track),
   };
 }

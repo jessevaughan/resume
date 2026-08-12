@@ -56,6 +56,19 @@ export function Resume({ resume }: { resume: ResolvedResume }) {
               <p>{resume.education.school}</p>
             </div>
           </Section>
+
+          {resume.recognition.length > 0 && (
+            <Section title="Recognition">
+              {resume.recognition.map((item, i) => (
+                <div className="skill-group" key={i}>
+                  <h3>{item.program}</h3>
+                  <p>
+                    {item.level}, {item.category}
+                  </p>
+                </div>
+              ))}
+            </Section>
+          )}
         </aside>
       </div>
     </>

@@ -20,8 +20,11 @@
 //   - contact details in the body, never in a Word header/footer (most ATS
 //     ignore header/footer content outright)
 //   - standard section headings only: Summary / Work Experience / Skills /
-//     Education. "Career Highlights" folds under Summary rather than becoming
-//     a heading no recruiter filters on.
+//     Education / Awards and Recognition. "Career Highlights" folds under
+//     Summary rather than becoming a heading no recruiter filters on, and
+//     "Recognition" (the app's label) becomes "Awards and Recognition" here
+//     for the same reason: parsers know the longer heading and don't reliably
+//     know the shorter one.
 //   - real Word bullet lists, not glyphs typed into the text
 //   - comma separators, not middots: "·" carries no word-boundary meaning to a
 //     parser, and extracted as "·GA4·GTM·CoreWebVitals·" in testing.
@@ -177,6 +180,27 @@ function buildDocument(resume, roleTitle, formatRange) {
     body([text(resume.education.degree, { bold: true, size: 20 })]),
     body([text(resume.education.focus, { size: 20 })]),
     body([text(resume.education.school, { size: 20 })]),
+
+    // Last section, and only when there's something in it. The project name
+    // rides along here because the .docx is flat: this sits several sections
+    // below the bullet that describes the work, so the connection has to be
+    // made in the line. The PDF sidebar sits beside that bullet and drops it.
+    ...((resume.recognition ?? []).length
+      ? [
+          heading("Awards and Recognition"),
+          ...resume.recognition.flatMap((item) => [
+            body([text(item.program, { bold: true, size: 20 })]),
+            body([
+              text(
+                item.project
+                  ? `${item.level}, ${item.category} (${item.project})`
+                  : `${item.level}, ${item.category}`,
+                { size: 20 },
+              ),
+            ]),
+          ]),
+        ]
+      : []),
   ];
 
   return makeDocument(children);
