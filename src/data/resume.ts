@@ -3,7 +3,10 @@ import { perTrack, type ResumeData } from "../resume-schema";
 export const resume: ResumeData = {
   name: "Jesse Vaughan",
 
-  role: perTrack("Creative & Brand Leader", "Design Engineer · Web Architect"),
+  role: perTrack(
+    "Creative & Brand Leader",
+    "Creative Technologist · Web Architect",
+  ),
 
   contact: {
     site: "jessevaughan.com",
@@ -19,7 +22,7 @@ export const resume: ResumeData = {
     // creative
     `Sixteen years across brand, web, and campaigns, the last nine-plus in creative leadership for a global SaaS marketing org. I've built and led distributed teams and run creative through three company-wide brand transformations. That work runs on a design and development background I still use daily, from the martech stack to the website itself.`,
     // engineering
-    `Design engineer and web architect with sixteen years building and owning production web properties end to end, across frontend, CMS architecture and migration, localization, and the infrastructure behind them. I owned AdRoll's site for twelve years. I also led creative for the marketing org at the same global SaaS company, so I move easily between writing the code, setting technical direction, and defending it to non-technical partners.`,
+    `Creative technologist and web architect with sixteen years building production web properties end to end, plus the tools and workflows the teams around them run on, across frontend, CMS architecture and migration, localization, and the infrastructure behind it. I owned AdRoll's site for twelve years and led creative for its marketing org, so I build tooling for creative teams from inside one, and I can defend the technical direction to people who don't write code.`,
   ),
 
   highlights: perTrack(
@@ -31,6 +34,7 @@ export const resume: ResumeData = {
     ],
     // engineering
     [
+      `Built the AI-assisted tooling AdRoll's marketing and creative teams worked in. A Claude Code workflow converted hardcoded template sections into CMS-editable entries and retired a standing copy/paste ticket queue, and a set of skills carried brand voice into the team's AI assistants with standards for where AI belonged.`,
       `Rebuilt three companies' websites: Selectica on ExpressionEngine (2013), OneLogin on Statamic (2014), and AdRoll on Statamic (2015–16). At AdRoll, was the only web designer and developer for four to five years, then extended front-end ownership into twelve years of running the full stack and infrastructure.`,
       `Pushed the rebuild from the growth team, pitches and justifications included, then migrated AdRoll from Drupal/Pantheon to a flat-file Statamic build in 2015–16. Owned the content model, the editorial system, and localization into ten locales across seven regions via Smartling. Cut hosting and deploy costs 80%, to $3,600 a year.`,
       `Owned the full production web stack, from Fastly, Cloudflare, DigitalOcean, and Laravel Forge through provisioning, scaling, server-upgrade decisions, and CI/CD via GitHub Actions. Two outages in that time.`,
@@ -69,8 +73,6 @@ export const resume: ResumeData = {
             // engineering
             [
               `Ran adroll.com on a flat-file Statamic build with page templates, reusable modules, and an editorial system that let marketing ship edits without engineering.`,
-              `Built an AI-assisted workflow with Claude Code to convert hardcoded template sections into CMS-editable entries. Retired a standing copy/paste ticket queue and moved routine edits to self-serve.`,
-              `Built tooling for teams using AI assistants, with skills carrying brand voice and standards for where AI belonged.`,
               `Led the site migration behind the 2025 AdRoll–RollWorks brand consolidation, porting RollWorks content into the existing adroll.com build and retiring rollworks.com to a redirect.`,
               `Responded to the 2023 Super Bowl DDoS alongside security and ops, scaling servers to absorb the flood before devops blocked the offending IP ranges. Then built a standing bot blocklist into Fastly with devops.`,
               `Hired web designers and developers to carry day-to-day site work, and kept ownership and my hands in the code.`,
@@ -252,12 +254,6 @@ export const resume: ResumeData = {
           ],
         },
         {
-          heading: "Side Project",
-          items: [
-            "Built this resume as a React and TypeScript app during time off. Print-first, with a PDF and DOCX build.",
-          ],
-        },
-        {
           heading: "Infrastructure & Ops",
           items: [
             "Fastly",
@@ -288,6 +284,12 @@ export const resume: ResumeData = {
             "creative team leadership",
           ],
         },
+        {
+          heading: "Independent Work",
+          items: [
+            "Resume built as a React and TypeScript app, print-first with PDF and DOCX builds. A public system map and dated changelog documenting the AI stack behind this work, including what got cut and why. Local model inference and a self-hosted memory layer running on hardware in my house.",
+          ],
+        },
       ],
     ),
   },
@@ -308,6 +310,13 @@ export const resume: ResumeData = {
       },
     ],
     // engineering
-    [],
+    [
+      {
+        program: "Transform Awards North America 2026",
+        level: "Finalist",
+        category: "Best Brand Consolidation",
+        project: "2025 AdRoll rebrand",
+      },
+    ],
   ),
 };
