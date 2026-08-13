@@ -38,6 +38,7 @@
 .signoff .name-line {
   font-family: var(--playful);
   font-size: var(--fs-signoff);
+  word-spacing: var(--ws-name);
 }
 
 /* ---- letter masthead variant ----

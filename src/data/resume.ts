@@ -22,22 +22,22 @@ export const resume: ResumeData = {
     // creative
     `Sixteen years across brand, web, and campaigns, the last nine-plus in creative leadership for a global SaaS marketing org. I've built and led distributed teams and run creative through three company-wide brand transformations. That work runs on a design and development background I still use daily, from the martech stack to the website itself.`,
     // engineering
-    `Creative technologist and web architect with sixteen years building production web properties end to end, plus the tools and workflows the teams around them run on, across frontend, CMS architecture and migration, localization, and the infrastructure behind it. I owned AdRoll's site for twelve years and led creative for its marketing org, so I build tooling for creative teams from inside one, and I can defend the technical direction to people who don't write code.`,
+    `Creative technologist and web architect with sixteen years building production web properties end to end, plus the tooling those teams run on, across frontend, CMS architecture and migration, localization, and the infrastructure underneath. I owned AdRoll's site for twelve years and led creative for its marketing org, so I build tooling for creative teams from inside one, and can defend the technical direction to people who don't write code.`,
   ),
 
   highlights: perTrack(
     // creative
     [
       `Led creative through three company-wide brand transformations, including a 2018 rebrand developed with the CEO and C-suite, a 2019 refresh and website rebuild, and the 2025 consolidation of two brands into one. Credited as Creative Director on the 2019 and 2025 work. Defined the visual and messaging systems marketing ran on.`,
-      `Led creative direction on #DareToGrow, a brand campaign with 15 documentary-style customer videos. It ran during a period when the company saw +65% account signups and +95% site traffic.`,
+      `Led creative direction on #DareToGrow, a brand campaign with 15 documentary-style customer videos and over 170 assets across a dozen channels. It ran during a period when the company saw +65% account signups and +95% site traffic, measured 35 days after launch against the 35 days prior.`,
       `Promoted from web designer to Head of Creative across twelve years at AdRoll, and stayed hands-on in the web platform I architected and owned.`,
     ],
     // engineering
     [
       `Built the AI-assisted tooling AdRoll's marketing and creative teams worked in. A Claude Code workflow converted hardcoded template sections into CMS-editable entries and retired a standing copy/paste ticket queue, and a set of skills carried brand voice into the team's AI assistants with standards for where AI belonged.`,
-      `Rebuilt three companies' websites: Selectica on ExpressionEngine (2013), OneLogin on Statamic (2014), and AdRoll on Statamic (2015–16). At AdRoll, was the only web designer and developer for four to five years, then extended front-end ownership into twelve years of running the full stack and infrastructure.`,
+      `Designed three companies' websites and built two: Selectica on ExpressionEngine (2013), OneLogin on Statamic (2014), and AdRoll on Statamic (2015–16). Statamic was my call at OneLogin, so AdRoll ran on a platform I'd shipped. At AdRoll, was the only web designer and developer until 2017.`,
       `Pushed the rebuild from the growth team, pitches and justifications included, then migrated AdRoll from Drupal/Pantheon to a flat-file Statamic build in 2015–16. Owned the content model, the editorial system, and localization into ten locales across seven regions via Smartling. Cut hosting and deploy costs 80%, to $3,600 a year.`,
-      `Owned the full production web stack, from Fastly, Cloudflare, DigitalOcean, and Laravel Forge through provisioning, scaling, server-upgrade decisions, and CI/CD via GitHub Actions. Two outages in that time.`,
+      `Owned the production web stack, from Fastly, Cloudflare, DigitalOcean, and Laravel Forge through provisioning, scaling, server upgrades, and CI/CD on GitHub Actions. Two outages in twelve years.`,
     ],
   ),
 
@@ -53,7 +53,8 @@ export const resume: ResumeData = {
             // creative
             `Led creative for a global SaaS marketing organization, from vision and narrative to the design systems.`,
             // engineering
-            `Owned and architected the web platform for a global SaaS marketing org, and led its creative team.`,
+            // none
+            ``,
           ),
           // It was dumb to keep these different so temporarily placing them in the same place before re-wiring
           note: {
@@ -74,7 +75,7 @@ export const resume: ResumeData = {
             [
               `Ran adroll.com on a flat-file Statamic build with page templates, reusable modules, and an editorial system that let marketing ship edits without engineering.`,
               `Led the site migration behind the 2025 AdRoll–RollWorks brand consolidation, porting RollWorks content into the existing adroll.com build and retiring rollworks.com to a redirect.`,
-              `Responded to the 2023 Super Bowl DDoS alongside security and ops, scaling servers to absorb the flood before devops blocked the offending IP ranges. Then built a standing bot blocklist into Fastly with devops.`,
+              `Responded to the 2024 Super Bowl DDoS alongside security and ops, scaling servers to absorb the flood before devops blocked the offending IP ranges. Then built a standing bot blocklist into Fastly with devops.`,
               `Hired web designers and developers to carry day-to-day site work, and kept ownership and my hands in the code.`,
             ],
           ),
@@ -107,6 +108,7 @@ export const resume: ResumeData = {
             // engineering
             [
               `Inherited the full creative team in late 2017 while continuing to own the web build. Mentored a graphic designer into web development, and after the split they took the RollWorks site on their own.`,
+              `Led the 2019 refresh and site rebuild as Creative Director, with the page builds moved in-house onto the Statamic build. Six agency-built pages had taken about ten weeks; fourteen in-house pages took about five.`,
             ],
           ),
         },
