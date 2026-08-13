@@ -182,9 +182,8 @@ function buildDocument(resume, roleTitle, formatRange) {
     body([text(resume.education.school, { size: 20 })]),
 
     // Last section, and only when there's something in it. The project name
-    // rides along here because the .docx is flat: this sits several sections
-    // below the bullet that describes the work, so the connection has to be
-    // made in the line. The PDF sidebar sits beside that bullet and drops it.
+    // rides along in the line, same as the app sidebar, so the award reads
+    // on its own several sections below the bullet describing the work.
     ...((resume.recognition ?? []).length
       ? [
           heading("Awards and Recognition"),

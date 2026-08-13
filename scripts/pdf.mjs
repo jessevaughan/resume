@@ -105,7 +105,9 @@ const TRACKS = [
       "DDoS",
       "JavaScript",
     ],
-    mustNotContain: ["#DareToGrow", "brand-confusion"], // DareToGrow never on engineering
+    // #DareToGrow came off this list Aug 2026: the campaign now earns a Track B
+    // highlight on its measured outcome. brand-confusion stays in the case study.
+    mustNotContain: ["brand-confusion"],
   },
 ];
 // ───────────────────────────────────────────────────────────────────────

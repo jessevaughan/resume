@@ -211,8 +211,8 @@ export interface Education {
  * An award or a placement on a shortlist. `level` is its own field rather than
  * part of a display string, because it's the part that changes when a
  * shortlist resolves. "Finalist" becomes "Silver" and no punctuation moves.
- * `project` is optional because only the .docx prints it; in the app the
- * sidebar sits beside the experience that already names the work.
+ * `project` is optional because a listing doesn't have to name the work.
+ * Both renders print it in parentheses after the category when it's there.
  */
 export interface Recognition {
   program: string;

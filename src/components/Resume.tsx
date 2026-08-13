@@ -63,7 +63,9 @@ export function Resume({ resume }: { resume: ResolvedResume }) {
                 <div className="skill-group" key={i}>
                   <h3>{item.program}</h3>
                   <p>
-                    {item.level}, {item.category}
+                    {item.project
+                      ? `${item.level}, ${item.category} (${item.project})`
+                      : `${item.level}, ${item.category}`}
                   </p>
                 </div>
               ))}

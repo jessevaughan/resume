@@ -29,15 +29,15 @@ export const resume: ResumeData = {
     // creative
     [
       `Led creative through three company-wide brand transformations, including a 2018 rebrand developed with the CEO and C-suite, a 2019 refresh and website rebuild, and the 2025 consolidation of two brands into one. Credited as Creative Director on the 2019 and 2025 work. Defined the visual and messaging systems marketing ran on.`,
-      `Led creative direction on #DareToGrow, a brand campaign with 15 documentary-style customer videos and over 170 assets across ten channels. It ran during a period when the company saw +65% account signups and +95% site traffic, measured 35 days after launch against the 35 days prior.`,
+      `Led creative direction on #DareToGrow, a brand campaign with fifteen documentary-style customer videos and over 170 assets across ten channels. It ran during a period when the company saw +65% account signups and +95% site traffic, measured 35 days after launch against the 35 days prior, with per-account spend flat.`,
       `Promoted from web designer to Head of Creative across twelve years at AdRoll, and stayed hands-on in the web platform I architected and owned.`,
     ],
     // engineering
     [
-      `Built the AI-assisted tooling AdRoll's marketing and creative teams worked in. A Claude Code workflow converted hardcoded template sections into CMS-editable entries and retired a standing copy/paste ticket queue, and a set of skills carried brand voice into the team's AI assistants with standards for where AI belonged.`,
+      `Built a Claude Code workflow that converted hardcoded template sections into CMS-editable entries and retired a standing copy/paste ticket queue, plus a set of skills carrying brand voice into the team's AI assistants with standards for where AI belonged.`,
       `Designed three companies' websites and built two, Selectica on ExpressionEngine in 2013 and AdRoll on Statamic in 2015–16. Statamic was my call at OneLogin, where I designed the site and oversaw the build, so AdRoll ran on a platform I'd chosen. AdRoll's only web designer and developer until 2017.`,
       `Argued for the rebuild from inside the growth team, pitches and justifications included, then migrated AdRoll from Drupal/Pantheon to a flat-file Statamic build in 2015–16. Owned the content model, the editorial system, and localization into ten locales across seven regions via Smartling. Cut hosting and deploy costs 80%, to $3,600 a year.`,
-      `Led creative direction on #DareToGrow, AdRoll's first top-of-funnel brand campaign, with fifteen documentary-style customer videos and over 170 assets across ten channels. Activations went up 23% in the 35 days after launch, with per-account spend flat.`,
+      `Owned the production web stack, from Fastly, Cloudflare, DigitalOcean, and Laravel Forge through provisioning, scaling, server upgrades, and CI/CD on GitHub Actions.`,
     ],
   ),
 
