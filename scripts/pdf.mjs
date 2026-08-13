@@ -91,7 +91,7 @@ const TRACKS = [
     ],
     mustContain: [
       "Jesse Vaughan",
-      "Design Engineer",
+      "Creative Technologist",
       "Web Architect",
       "AdRoll",
       "Statamic",

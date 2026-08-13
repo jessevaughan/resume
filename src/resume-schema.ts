@@ -283,7 +283,7 @@ export interface ResolvedResume {
   track: Track;
   name: string;
   role: string;
-  /** Browser <title>, e.g. "Jesse Vaughan — Design Engineer · Web Architect". */
+  /** Browser <title>, e.g. "Jesse Vaughan — Creative Technologist · Web Architect". */
   documentTitle: string;
   contact: Contact;
   summary: string;
