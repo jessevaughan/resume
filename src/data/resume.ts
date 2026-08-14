@@ -20,7 +20,7 @@ export const resume: ResumeData = {
 
   summary: perTrack(
     // creative
-    `Sixteen years across brand, web, and campaigns, the last nine-plus in creative leadership for a global SaaS marketing org. I've built and led distributed teams and run creative through three company-wide brand transformations. That work runs on a design and development background I still use daily, from the martech stack to the website itself.`,
+    `Sixteen years across brand, web, and campaigns, the last nine-plus in creative leadership for a global SaaS marketing org. I've hired and led the creative teams on three company-wide brand transformations. That work runs on a design and development background I still use daily, from the martech stack to the website itself.`,
     // engineering
     `Creative technologist and web architect with sixteen years building production web properties end to end, plus the tooling the teams behind them run on, across frontend, CMS architecture and migration, localization, and the infrastructure underneath. I owned AdRoll's site for twelve years and led creative for its marketing org, so the tooling I built solved problems I was also accountable for, and I can defend the technical direction to people who don't write code.`,
   ),
@@ -28,16 +28,17 @@ export const resume: ResumeData = {
   highlights: perTrack(
     // creative
     [
-      `Led creative through three company-wide brand transformations, including a 2018 rebrand developed with the CEO and C-suite, a 2019 refresh and website rebuild, and the 2025 consolidation of two brands into one. Credited as Creative Director on the 2019 and 2025 work. Defined the visual and messaging systems marketing ran on.`,
-      `Led creative direction on #DareToGrow, a brand campaign with fifteen documentary-style customer videos and over 170 assets across ten channels. It ran during a period when the company saw +65% account signups and +95% site traffic, measured 35 days after launch against the 35 days prior, with per-account spend flat.`,
-      `Promoted from web designer to Head of Creative across twelve years at AdRoll, and stayed hands-on in the web platform I architected and owned.`,
+      `Ran creative on the 2018 rebrand with the CEO and C-suite, the 2019 refresh and website rebuild, and the 2025 consolidation of two brands into one, with Creative Director credit on the last two.`,
+      `Led creative direction on #DareToGrow, a brand campaign with fifteen documentary-style customer videos and over 170 assets across ten channels. It ran during a period when the company saw +23% activations, +65% account signups, and +95% site traffic, with per-account spend flat, all measured 35 days after launch against the 35 days prior.`,
+      `Built creative operations across five and a half years without a dedicated project manager, working out SLAs with brand leadership so scope and timing were decided before requests came in.`,
     ],
     // engineering
     [
-      `Built a Claude Code workflow that converted hardcoded template sections into CMS-editable entries and retired a standing copy/paste ticket queue, plus a set of skills carrying brand voice into the team's AI assistants with standards for where AI belonged.`,
-      `Designed three companies' websites and built two, Selectica on ExpressionEngine in 2013 and AdRoll on Statamic in 2015–16. Statamic was my call at OneLogin, where I designed the site and oversaw the build, so AdRoll ran on a platform I'd chosen. AdRoll's only web designer and developer until 2017.`,
-      `Argued for the rebuild from inside the growth team, pitches and justifications included, then migrated AdRoll from Drupal/Pantheon to a flat-file Statamic build in 2015–16. Owned the content model, the editorial system, and localization into ten locales across seven regions via Smartling. Cut hosting and deploy costs 80%, to $3,600 a year.`,
-      `Owned the production web stack, from Fastly, Cloudflare, DigitalOcean, and Laravel Forge through provisioning, scaling, server upgrades, and CI/CD on GitHub Actions.`,
+      `Built a Claude Code workflow that converted hardcoded template sections into CMS-editable entries and retired a standing copy/paste ticket queue, plus AI skills carrying brand voice and standards for where AI belonged.`,
+      `Designed and built the Selectica site on ExpressionEngine in 2013, then designed OneLogin's and chose Statamic there, which is why AdRoll ran on Statamic when I rebuilt it. AdRoll's only web designer and developer until 2017.`,
+      `Carried search and discovery through three site rebuilds, including redirect maps, canonicals, hreflang, and sitemap generation I debugged down to manual indexing submissions.`,
+      `Pitched the AdRoll rebuild from inside the growth team, where I sat for a year without handing off the website, then migrated the site from Drupal/Pantheon to a flat-file Statamic build in 2015–16 and cut hosting and deploy costs 80%, to $3,600 a year.`,
+      `Owned the production web stack, from provisioning and scaling through server upgrades and CI/CD.`,
     ],
   ),
 
@@ -64,17 +65,16 @@ export const resume: ResumeData = {
           bullets: perTrack(
             // creative
             [
-              `Directed the 2025 consolidation of AdRoll and RollWorks into a single brand, from the Organic Intelligence brand mood through brand architecture, messaging systems, and a full site migration. The guidelines became the company's source of truth for brand decisions.`,
+              `Directed the 2025 AdRoll and RollWorks consolidation, from the Organic Intelligence mood through brand architecture, messaging systems, and a full site migration. The brand guidelines became the company's source of truth.`,
               `Grew a distributed creative team of up to seven across the US, spanning design, web, video, and copy.`,
-              `Set creative strategy with the CMO, VP of Marketing, and brand leadership.`,
-              `Built an AI-assisted workflow with Claude Code to turn templated site sections into CMS-editable entries. It retired a standing copy/paste ticket queue and moved routine edits to self-serve.`,
-              `Wrote AI skills carrying the brand voice for the team, and set standards for where AI belonged.`,
-              `Founding board member of RollAsia (2018–2026), the company's Asian and Pacific Islander employee resource group. Organized and hosted company-wide programming and speaker events.`,
+              `Set creative strategy with the CMO and VP of Marketing.`,
+              `Built an AI-assisted workflow with Claude Code to turn hardcoded site sections into CMS-editable entries, retiring a standing copy/paste ticket queue, plus AI skills carrying brand voice and standards for where AI belonged.`,
+              `Founding board member of RollAsia (2018–2026), AdRoll's Asian and Pacific Islander employee resource group.`,
             ],
             // engineering
             [
-              `Ran adroll.com on a flat-file Statamic build with page templates, reusable modules, and an editorial system that let marketing ship edits without engineering. Two outages in twelve years.`,
-              `Led the site migration behind the 2025 AdRoll–RollWorks brand consolidation, porting RollWorks content into the existing adroll.com build and retiring rollworks.com to a redirect.`,
+              `Ran adroll.com with page templates, reusable modules, and an editorial system that let marketing ship edits without engineering. Two outages in twelve years.`,
+              `Led the site migration for the 2025 AdRoll–RollWorks brand consolidation, porting RollWorks content into the existing adroll.com build and retiring rollworks.com to a redirect.`,
               `Responded to a DDoS in 2024 alongside security and devops, scaling servers to absorb the flood before they blocked the offending IP ranges. Then built a standing bot blocklist into Fastly with the same team.`,
               `Hired web designers and developers for day-to-day site work; kept platform ownership and my hands in the code.`,
             ],
@@ -88,10 +88,11 @@ export const resume: ResumeData = {
             // creative
             [
               `Designed the team's creative review and critique system, and kept brand expression consistent across marketing.`,
+              `Moved the creative team onto project management tooling in 2019, then the rest of marketing by 2022.`,
             ],
             // engineering
             [
-              `Maintained and evolved the core Statamic build and web design system, and set the front-end standard for the team, while directing creative. Oversaw three sites across the two businesses after the 2018 brand split.`,
+              `Maintained the build and design system across three sites after the 2018 brand split.`,
             ],
           ),
         },
@@ -102,12 +103,15 @@ export const resume: ResumeData = {
           bullets: perTrack(
             // creative
             [
-              `Inherited the full creative team in late 2017 when the head of creative departed, then led direction across design, web, video, and copy as hiring manager.`,
+              `Inherited the full creative team in late 2017 when the head of creative departed, then took over direction and hiring.`,
+              `Art directed photo and video shoots for campaigns and the site.`,
+              `Ran localization for the site into ten locales across seven regions through Smartling.`,
+              `Directed print, swag, direct mail, and office environmental design with outside vendors.`,
               `Mentored a graphic designer into web development. After the 2018 split they took the RollWorks site independently and built a UI/UX career from it.`,
             ],
             // engineering
             [
-              `Inherited the full creative team in late 2017 while continuing to own the web build. Mentored a graphic designer into web development, and after the split they took the RollWorks site on their own.`,
+              `Kept the web build while inheriting the full creative team in late 2017.`,
               `Led the 2019 refresh and site rebuild as Creative Director, with the page builds moved in-house onto the Statamic build. Six agency-built pages had taken about ten weeks; fourteen in-house pages took about five.`,
             ],
           ),
@@ -116,9 +120,9 @@ export const resume: ResumeData = {
           title: "Team Lead, Web Design - Marketing",
           start: { year: 2017, month: 2 },
           end: { year: 2018, month: 1 },
-          // Creative is the space-constrained track at one page, so this role goes
-          // title-only there (its neighbors already are). Engineering has the room
-          // and keeps the line.
+          // Creative goes title-only here (its neighbors already are).
+          // Engineering keeps the line: it is the only place on that track
+          // that dates the first direct report.
           bullets: perTrack(
             [],
             [
@@ -127,17 +131,23 @@ export const resume: ResumeData = {
           ),
         },
         // The early IC years, split into real dated entries rather than one
-        // lumped "Earlier" block. Titles are the ones on LinkedIn. Kept
-        // title-only: the substance (the Statamic/ExpressionEngine rebuilds, the
-        // Drupal migration, Smartling) already lives in Career Highlights, so
-        // bullets here would just duplicate it.
+        // lumped "Earlier" block. Titles are the ones on LinkedIn. Near
+        // title-only: the substance (the Statamic/ExpressionEngine rebuilds,
+        // the Drupal migration) already lives in Career Highlights, so bullets
+        // here carry only what the highlights don't. Smartling is the one
+        // exception, moved down off engineering highlight four to shorten it.
         {
           title: "Web Designer - Marketing",
           // Months here (and on OneLogin below) disambiguate the Nov 2014 handoff
           // so the two don't both read as a bare, overlapping "2014".
           start: { year: 2014, month: 11 },
           end: { year: 2017, month: 1 },
-          bullets: perTrack([], []),
+          bullets: perTrack(
+            [],
+            [
+              `Owned the content model and localization into ten locales across seven regions via Smartling.`,
+            ],
+          ),
         },
       ],
     },
@@ -170,7 +180,12 @@ export const resume: ResumeData = {
           title: "Senior Web Designer & Developer",
           start: { year: 2011, month: 2 },
           end: { year: 2013, month: 2 },
-          bullets: perTrack([], []),
+          bullets: perTrack(
+            [],
+            [
+              `Designed and hand-coded about a dozen client sites, front ends integrated with property and booking systems.`,
+            ],
+          ),
         },
       ],
       // Tenure only: these keep the earliest date at Dec 2009, which is what
@@ -191,7 +206,7 @@ export const resume: ResumeData = {
   ],
 
   skills: {
-    heading: perTrack("Skills", "Core Skills"),
+    heading: perTrack("Skills", "Skills"),
     groups: perTrack(
       // creative
       [
@@ -231,13 +246,21 @@ export const resume: ResumeData = {
             "HTML/CSS/JS",
             "Figma",
             "Adobe CC",
+            "accessibility (color and contrast)",
+            "AI-assisted design & dev workflows",
+          ],
+        },
+        {
+          heading: "Search & Martech",
+          items: [
             "HubSpot",
             "Marketo",
             "Klaviyo",
             "GA4",
             "GTM",
+            "technical SEO",
+            "structured data",
             "Core Web Vitals",
-            "AI-assisted design & dev workflows",
           ],
         },
       ],
@@ -264,26 +287,29 @@ export const resume: ResumeData = {
             "Laravel Forge",
             "DNS",
             "CI/CD (GitHub Actions)",
-            "Core Web Vitals",
             "incident response",
           ],
         },
         {
-          heading: "Localization & Martech",
+          heading: "Search & Discovery",
           items: [
-            "Smartling",
-            "HubSpot (HubL, CLI)",
-            "Marketo",
-            "Klaviyo",
-            "GA4",
-            "GTM",
+            "technical SEO",
+            "structured data & schema",
+            "redirects & canonicals",
+            "hreflang",
+            "Search Console",
+            "Core Web Vitals",
+            "AEO & LLM visibility",
           ],
+        },
+        {
+          heading: "Localization & Martech",
+          items: ["Smartling", "HubSpot", "Marketo", "Klaviyo", "GA4", "GTM"],
         },
         {
           heading: "Design & Creative",
           items: [
             "creative direction",
-            "campaign direction",
             "design systems",
             "Figma",
             "Adobe Creative Suite",
@@ -293,7 +319,9 @@ export const resume: ResumeData = {
         {
           heading: "Independent Work",
           items: [
-            "Resume built as a React and TypeScript app, print-first with PDF and DOCX builds. A public system map and dated changelog documenting the AI stack behind this work, including what got cut and why. Local model inference and a self-hosted memory layer running on hardware in my house.",
+            "React and TypeScript resume app with print-first PDF and DOCX builds",
+            "public system map and dated changelog for my AI stack including what got cut",
+            "local model inference and a self-hosted memory layer on hardware at home",
           ],
         },
       ],

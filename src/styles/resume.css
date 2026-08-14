@@ -309,6 +309,12 @@ section:last-child {
   margin-bottom: var(--gap-bullet);
 }
 
+/* no single-word last lines */
+.main li,
+.sidebar p {
+  text-wrap: pretty;
+}
+
 /* hanging bullet — in flow, not positioned (PDF text order) */
 .main li::before {
   content: "•";

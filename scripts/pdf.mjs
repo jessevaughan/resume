@@ -86,7 +86,7 @@ const TRACKS = [
       "Summary",
       "Career Highlights",
       "Experience",
-      "Core Skills",
+      "Skills",
       "Education",
     ],
     mustContain: [
@@ -181,6 +181,74 @@ async function snapshot(page, url, path) {
   });
 }
 
+// Widths of every non-breaking run, measured against the line box it sits in.
+// A nowrap run wider than its column can't wrap, so it overflows the column
+// edge instead. Nothing else in the build sees that: reading order, keywords,
+// and page count all stay green while text hangs off the side of the sidebar.
+//
+// What it covers today is hyphenSafe's per-word spans, which is a live risk: a
+// hyphenated term wider than its column would hang off the edge.
+//
+// The case it was built for is dormant. Marking two skills items nowrap was
+// tried on August 13, 2026 and reverted the same day. Forcing an item whole
+// does not remove the bad break in a column this narrow, it relocates it to the
+// adjacent lines: Infrastructure & Ops went three lines to four with a ragged
+// right edge, and Web Architecture & Development gained a one-word line ending
+// in a separator, which is the defect two earlier passes had just removed. This
+// stays wired up so that decision can be revisited with the measurement already
+// in place rather than rebuilt from scratch.
+async function measureNowrap(page) {
+  await page.emulateMediaType("print");
+  const runs = await page.evaluate(() =>
+    [...document.querySelectorAll(".nowrap")].map((el) => {
+      const block = el.closest("p, li, h1, h2, h3");
+      const cs = getComputedStyle(block);
+      const avail =
+        block.clientWidth -
+        parseFloat(cs.paddingLeft) -
+        parseFloat(cs.paddingRight);
+      return {
+        text: el.textContent,
+        column: el.closest(".sidebar") ? "sidebar" : "main",
+        width: +el.getBoundingClientRect().width.toFixed(1),
+        avail: +avail.toFixed(1),
+      };
+    }),
+  );
+  await page.emulateMediaType(null);
+  return runs;
+}
+
+// Fails on any overflow. Multi-word runs are reported by name because those
+// would be hand-maintained exceptions rather than hyphenSafe's single words;
+// with the skills exceptions reverted there are none, so that line stays quiet
+// until someone adds one.
+function checkNowrap(measured) {
+  console.log("\nNon-breaking runs (must fit their column):");
+  let ok = true;
+  for (const { track, runs } of measured) {
+    const over = runs.filter((r) => r.width > r.avail);
+    for (const r of runs.filter((r) => r.text.includes(" "))) {
+      const pct = ((r.width / r.avail) * 100).toFixed(0);
+      console.log(
+        `  ${track}/${r.column}: "${r.text}" ${r.width}px of ${r.avail}px (${pct}%)`,
+      );
+    }
+    if (over.length === 0) {
+      console.log(`  ✓ ${track}: ${runs.length} runs, all inside the column`);
+    } else {
+      ok = false;
+      console.error(`  ✗ ${track}:`);
+      for (const r of over) {
+        console.error(
+          `      - "${r.text}" is ${r.width}px in a ${r.avail}px column; it will overflow the edge`,
+        );
+      }
+    }
+  }
+  return ok;
+}
+
 async function renderPdfs(port) {
   await mkdir(outDir, { recursive: true });
   const base = `http://127.0.0.1:${port}`;
@@ -193,6 +261,7 @@ async function renderPdfs(port) {
       const file = fileFor(name);
       await snapshot(page, `${base}/?track=${id}`, join(outDir, file));
       console.log(`  ✓ ${file}`);
+      nowrapRuns.push({ track: id, runs: await measureNowrap(page) });
     }
 
     // Cover letters: the company comes from the rendered page, so the export
@@ -350,6 +419,7 @@ await ensureDist();
 console.log("Rendering PDFs:");
 const { server, port } = await startServer();
 let letterFiles = [];
+const nowrapRuns = [];
 try {
   letterFiles = await renderPdfs(port);
 } finally {
@@ -359,6 +429,7 @@ try {
 const atsOk = checkAts();
 const resumesOk = checkResumes();
 const lettersOk = checkLetters(letterFiles);
-const ok = atsOk && resumesOk && lettersOk;
+const nowrapOk = checkNowrap(nowrapRuns);
+const ok = atsOk && resumesOk && lettersOk && nowrapOk;
 console.log(ok ? "\nDone." : "\nFAILED. See problems above.");
 process.exit(ok ? 0 : 1);
