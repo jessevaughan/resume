@@ -320,7 +320,8 @@ export const resume: ResumeData = {
           heading: "Independent Work",
           items: [
             "React and TypeScript resume app with print-first PDF and DOCX builds",
-            "public system map and dated changelog for my AI stack including what got cut",
+            "public system map with llms.txt and agent-facing structure on my own site",
+            "dated changelog for my AI stack including what got cut",
             "local model inference and a self-hosted memory layer on hardware at home",
           ],
         },
