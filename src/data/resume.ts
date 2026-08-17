@@ -342,7 +342,7 @@ export const resume: ResumeData = {
     [
       {
         program: "Transform Awards North America 2026",
-        level: "Finalist",
+        level: "Shortlisted",
         category: "Best Brand Consolidation",
         project: "2025 AdRoll rebrand",
       },
@@ -351,7 +351,7 @@ export const resume: ResumeData = {
     [
       {
         program: "Transform Awards North America 2026",
-        level: "Finalist",
+        level: "Shortlisted",
         category: "Best Brand Consolidation",
         project: "2025 AdRoll rebrand",
       },
