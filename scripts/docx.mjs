@@ -60,7 +60,7 @@ const outDir = join(root, "docx");
 const NAME = "Jesse Vaughan";
 const PDF_SUFFIX = {
   creative: "Creative-Brand-Leader",
-  engineering: "Engineer-Web-Architect",
+  engineering: "Creative-Technologist-Web-Architect",
 };
 
 // ── Building blocks ────────────────────────────────────────────────────
@@ -156,17 +156,19 @@ function buildDocument(resume, roleTitle, formatRange) {
     ...resume.highlights.map(bullet),
 
     heading("Work Experience"),
-    ...resume.experience.flatMap((employer) => [
-      ...employer.roles.map((role) =>
-        roleParagraphs(role, employer.company, formatRange),
-      ),
-      // Earlier titles get full entries here rather than the PDF's one
-      // compressed line: they are what carry the 2009 start date, and the
-      // experience arithmetic is the whole reason they're on the resume.
-      ...(employer.earlier ?? []).map((role) =>
-        roleParagraphs(role, employer.company, formatRange),
-      ),
-    ].flat()),
+    ...resume.experience.flatMap((employer) =>
+      [
+        ...employer.roles.map((role) =>
+          roleParagraphs(role, employer.company, formatRange),
+        ),
+        // Earlier titles get full entries here rather than the PDF's one
+        // compressed line: they are what carry the 2009 start date, and the
+        // experience arithmetic is the whole reason they're on the resume.
+        ...(employer.earlier ?? []).map((role) =>
+          roleParagraphs(role, employer.company, formatRange),
+        ),
+      ].flat(),
+    ),
 
     heading("Skills"),
     ...resume.skills.groups.map((group) =>
@@ -215,8 +217,8 @@ const titleCase = (slug) =>
 
 const SPEC = { "--role": "value", "--track": "value", "--letter": "value" };
 const USAGE =
-  'npm run docx            (sync)\n' +
-  '         npm run docx -- --letter <slug>\n' +
+  "npm run docx            (sync)\n" +
+  "         npm run docx -- --letter <slug>\n" +
   '         npm run docx -- --role "Title" [--track <t>]';
 
 function parseArgs(argv) {
@@ -237,7 +239,6 @@ function parseArgs(argv) {
   };
 }
 
-
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.errors.length) failArgs(args.errors, USAGE);
@@ -249,7 +250,11 @@ async function main() {
   const render = async (track, roleTitle, suffix, tailoring = null) => {
     const base = resolveResume(resume, track);
     // Tailoring layers onto the resolved copy; the core resume is never edited.
-    const { resume: resolved, applied, unmatched } = applyTailoring(base, tailoring);
+    const {
+      resume: resolved,
+      applied,
+      unmatched,
+    } = applyTailoring(base, tailoring);
     const title = roleTitle ?? tailoring?.title ?? resolved.role;
     const file = `${stem}-${suffix}.docx`;
     await writeDocx(buildDocument(resolved, title, formatRange), outDir, file);
@@ -326,7 +331,8 @@ async function main() {
     for (const error of tailoring?.errors ?? []) {
       console.log(`  ! tailored/${slug}.txt ${error}`);
     }
-    if (!letter && !tailoring?.title) untitled.push({ slug, title: parsed.title });
+    if (!letter && !tailoring?.title)
+      untitled.push({ slug, title: parsed.title });
   }
 
   // Remove tailored copies whose posting is gone, so ./docx mirrors ./postings

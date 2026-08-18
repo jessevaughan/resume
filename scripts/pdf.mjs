@@ -79,7 +79,7 @@ const TRACKS = [
   },
   {
     id: "engineering",
-    name: "Engineer-Web-Architect",
+    name: "Creative-Technologist-Web-Architect",
     order: [
       "Jesse Vaughan",
       "hello@jessevaughan.com",

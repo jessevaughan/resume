@@ -88,11 +88,12 @@ export const resume: ResumeData = {
             // creative
             [
               `Designed the team's creative review and critique system, and kept brand expression consistent across marketing.`,
-              `Moved the creative team onto project management tooling in 2019, then the rest of marketing by 2022.`,
+              `Moved the creative team onto project management tooling, then the rest of marketing by 2022.`,
             ],
             // engineering
             [
               `Maintained the build and design system across three sites after the 2018 brand split.`,
+              `Moved the creative team onto Asana, then the rest of marketing by 2022.`,
             ],
           ),
         },
@@ -242,7 +243,7 @@ export const resume: ResumeData = {
           heading: "Technical Fluency",
           items: [
             "design systems",
-            "CMS architecture and migration",
+            "CMS architecture and migration (Drupal, ExpressionEngine)",
             "agent-facing site structure",
             "HTML/CSS/JS",
             "Figma",
@@ -275,7 +276,8 @@ export const resume: ResumeData = {
             "Statamic / Laravel",
             "Astro",
             "information architecture (content modeling, taxonomy, URL structure)",
-            "CMS architecture and migration",
+            "CMS architecture and migration (Drupal, ExpressionEngine)",
+            "accessibility (color and contrast)",
             "component & design systems",
             "React / Next.js (working knowledge)",
             "AI-assisted design & dev workflows (Claude Code)",
