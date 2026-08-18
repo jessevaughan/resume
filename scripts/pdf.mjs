@@ -14,6 +14,7 @@ import { spawnSync } from "node:child_process";
 import { join, extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import puppeteer from "puppeteer";
+import { checkProse } from "./lib/prose.mjs";
 
 const root = resolve(fileURLToPath(new URL(".", import.meta.url)), "..");
 const distDir = join(root, "dist");
@@ -425,11 +426,15 @@ try {
 } finally {
   server.close();
 }
-// Evaluate both before deciding, so one failure doesn't hide the other.
+// Evaluate every check before deciding, so one failure doesn't hide another.
 const atsOk = checkAts();
 const resumesOk = checkResumes();
 const lettersOk = checkLetters(letterFiles);
 const nowrapOk = checkNowrap(nowrapRuns);
-const ok = atsOk && resumesOk && lettersOk && nowrapOk;
+// Spelling and punctuation, read from the authored copy rather than from these
+// PDFs: hyphenSafe's per-word spans make extracted text the wrong input for a
+// spell check. See scripts/lib/prose.mjs.
+const proseOk = await checkProse();
+const ok = atsOk && resumesOk && lettersOk && nowrapOk && proseOk;
 console.log(ok ? "\nDone." : "\nFAILED. See problems above.");
 process.exit(ok ? 0 : 1);

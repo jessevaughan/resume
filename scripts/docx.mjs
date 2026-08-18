@@ -45,6 +45,7 @@ import {
   tailoredSlugs,
 } from "./lib/tailoring.mjs";
 import { parseFlags, failArgs } from "./lib/cli.mjs";
+import { checkProse } from "./lib/prose.mjs";
 import {
   body,
   contactLine,
@@ -405,7 +406,15 @@ function report(written, stale, untitled = [], skipped = [], orphaned = []) {
   console.log(`\nWrote ${written.length} file(s) to ./docx`);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+// The prose check runs after the files are written, on every path through
+// main(), including the targeted --letter and --role runs that return early.
+// Writing first is deliberate: a typo is worth knowing about, and a .docx you
+// can open and read is a better place to see it than a failed run with no file.
+main()
+  .then(async () => {
+    if (!(await checkProse())) process.exit(1);
+  })
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

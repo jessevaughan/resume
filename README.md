@@ -98,6 +98,8 @@ Two or more tracks share one layout and diverge field by field through `perTrack
 | `npm run keywords -- <slug> --write` | scaffold `tailored/<slug>.txt` |
 | `npm run letter -- <slug>` | cover letter as `.docx` and paste-ready `.txt` |
 | `npm run pdf` | designed PDFs plus the reading-order check |
+| `npm run prose` | spell and punctuation check the authored copy |
+| `npm run prose -- --list` | unknown words, for seeding `scripts/words.txt` |
 | `npm run dev` | live design preview at :5173 |
 | `npm run readme` | preview a markdown file as GitHub renders it |
 | `npm run lint` | oxlint |
@@ -301,6 +303,24 @@ There's deliberately no page-count check.
 A .docx has no pages until something lays it out.
 Each renderer paginates differently, which makes any number here one renderer's guess.
 Two pages is fine: page count is a human convention, not an ATS constraint.
+
+### spelling and punctuation
+
+Both `npm run docx` and `npm run pdf` end with a check on the copy itself, and a finding fails the run.
+`npm run prose` is the same check on its own.
+
+It reads the authored strings in [`src/data/resume.ts`](src/data/resume.ts), not the rendered files.
+Both artifacts come from the same prose, so a typo is caught once instead of twice, and extracted PDF text is the wrong input anyway: `hyphenSafe` splits hyphenated words across spans, so a spell check reading it would report rendering artifacts forever.
+Coverage is both tracks, every cover letter, and every tailoring applied to the resume it rewrites.
+
+Spelling comes from a bundled dictionary, so unlike the `pdftotext` checks it can't quietly skip on a machine that's missing a binary.
+A resume is mostly proper nouns, so the words that dictionary doesn't know live in [`scripts/words.txt`](scripts/words.txt), one per line, and their casing is enforced: with `AdRoll` on the list, `Adroll` is a finding.
+Tailored copy is checked against the posting as well, so a term the employer uses in their own posting needs no entry.
+
+Read `--list` output before pasting it in. A typo that lands in the wordlist is invisible from then on, which is the one way this check can be defeated.
+
+The punctuation rules cover double spaces, space before punctuation, missing space after a comma, repeated words, curly quotes, hyphens in year ranges, unbalanced brackets, invisible characters, and a bullet group where some items end in a period and others don't.
+Every rule was run against the current copy before it was added and every one is silent on it, because a rule that fires on prose you consider correct is a rule that teaches you to ignore the check.
 
 ## 6. the designed PDF (optional)
 

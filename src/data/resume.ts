@@ -20,7 +20,7 @@ export const resume: ResumeData = {
 
   summary: perTrack(
     // creative
-    `Sixteen years across brand, web, and campaigns, the last nine-plus in creative leadership for a global SaaS marketing org. I've hired and led the creative teams on three company-wide brand transformations. That work runs on a design and development background I still use daily, from the martech stack to the website itself.`,
+    `Sixteen years across brand, web, and campaigns, the last nine-plus in creative leadership for a global SaaS marketing org. I've hired and led the creative teams on three company-wide brand transformations. That work runs on design and development I still do, from the martech stack to the website itself.`,
     // engineering
     `Creative technologist and web architect with sixteen years building production web properties end to end, plus the tooling the teams behind them run on, across frontend, CMS architecture and migration, localization, and the infrastructure underneath. I owned AdRoll's site for twelve years and led creative for its marketing org, so the tooling I built solved problems I was also accountable for, and I can defend the technical direction to people who don't write code.`,
   ),
@@ -66,8 +66,8 @@ export const resume: ResumeData = {
             // creative
             [
               `Directed the 2025 AdRoll and RollWorks consolidation, from the Organic Intelligence mood through brand architecture, messaging systems, and a full site migration. The brand guidelines became the company's source of truth.`,
-              `Grew a distributed creative team of up to seven across the US, spanning design, web, video, and copy.`,
-              `Set creative strategy with the CMO and VP of Marketing.`,
+              `Led and hired into a distributed creative team of up to seven across the US, spanning design, web, video, and copy.`,
+              `Worked with the CMO and VP of Marketing on creative direction for the org.`,
               `Built an AI-assisted workflow with Claude Code to turn hardcoded site sections into CMS-editable entries, retiring a standing copy/paste ticket queue, plus AI skills carrying brand voice and standards for where AI belonged.`,
               `Founding board member of RollAsia (2018–2026), AdRoll's Asian and Pacific Islander employee resource group.`,
             ],
@@ -104,7 +104,7 @@ export const resume: ResumeData = {
           bullets: perTrack(
             // creative
             [
-              `Inherited the full creative team in late 2017 when the head of creative departed, then took over direction and hiring.`,
+              `Inherited the full creative team mid-2017 when the head of creative departed, then took over direction and hiring.`,
               `Art directed photo and video shoots for campaigns and the site.`,
               `Ran localization for the site into ten locales across seven regions through Smartling.`,
               `Directed print, swag, direct mail, and office environmental design with outside vendors.`,
@@ -112,7 +112,7 @@ export const resume: ResumeData = {
             ],
             // engineering
             [
-              `Kept the web build while inheriting the full creative team in late 2017.`,
+              `Kept the web build while inheriting the full creative team mid-2017.`,
               `Led the 2019 refresh and site rebuild as Creative Director, with the page builds moved in-house onto the Statamic build. Six agency-built pages had taken about ten weeks; fourteen in-house pages took about five.`,
             ],
           ),

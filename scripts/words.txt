@@ -1,0 +1,77 @@
+# Words scripts/lib/prose.mjs accepts that a dictionary doesn't know.
+#
+# One word per line, "#" starts a comment. Casing here is canonical and is
+# enforced: with "AdRoll" on the list, "Adroll" in the copy is a finding. That
+# is the point of the file as much as the spelling is, because brand casing is
+# the error a spell checker would never catch on its own.
+#
+# Add a word only after reading it. A typo that lands here is invisible to the
+# check from then on, which is the one way this guardrail can be defeated.
+#
+# Hyphenated and slashed compounds don't belong here: the tokeniser splits
+# "in-house" and "CI/CD" into their parts, so the parts are what get checked.
+# Anything containing a digit is skipped entirely ("GA4", "$3,600").
+#
+# Seed and audit this list with `npm run prose -- --list`.
+
+# ── Brands, products, platforms ────────────────────────────────────────
+AdRoll
+NextRoll
+RollWorks
+RollAsia
+OneLogin
+Selectica
+Securitize
+LinkedIn
+Statamic
+ExpressionEngine
+Laravel
+Astro
+Cloudflare
+DigitalOcean
+Fastly
+Figma
+Asana
+HubSpot
+Marketo
+Klaviyo
+Smartling
+AEM
+
+# ── Campaigns ──────────────────────────────────────────────────────────
+DareToGrow
+
+# ── Acronyms and initialisms ───────────────────────────────────────────
+CMS
+CMO
+DNS
+DDoS
+DOCX
+GTM
+JS
+JSON
+LD
+LLM
+SEO
+AEO
+SLAs
+UI
+UX
+
+# ── Industry and technical vocabulary ──────────────────────────────────
+activations
+agentic
+architected
+blocklist
+canonicals
+changelog
+dev
+devops
+frontend
+hardcoded
+hreflang
+martech
+rebrand
+SaaS
+signups
+tokenization

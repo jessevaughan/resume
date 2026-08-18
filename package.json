@@ -12,6 +12,7 @@
     "docx": "node scripts/docx.mjs",
     "publish:dist": "node scripts/publish.mjs",
     "ship": "npm run pdf && npm run build && node scripts/publish.mjs",
+    "prose": "node scripts/prose.mjs",
     "keywords": "node scripts/keywords.mjs",
     "letter": "node scripts/letter.mjs",
     "readme": "node scripts/readme.mjs"
@@ -25,7 +26,9 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
+    "dictionary-en": "^4.0.0",
     "docx": "^9.7.1",
+    "nspell": "^2.1.5",
     "oxlint": "^1.71.0",
     "puppeteer": "^25.3.0",
     "typescript": "~6.0.2",
