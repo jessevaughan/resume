@@ -93,7 +93,6 @@ export const resume: ResumeData = {
             // engineering
             [
               `Maintained the build and design system across three sites after the 2018 brand split.`,
-              `Moved the creative team onto Asana, then the rest of marketing by 2022.`,
             ],
           ),
         },
