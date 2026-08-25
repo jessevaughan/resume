@@ -36,7 +36,7 @@ const lettersDir = join(root, "src", "data", "letters");
 const NAME = "Jesse Vaughan";
 const PDFS = [
   `${NAME.replace(/\s+/g, "-")}-Resume-Creative-Brand-Leader.pdf`,
-  `${NAME.replace(/\s+/g, "-")}-Resume-Engineer-Web-Architect.pdf`,
+  `${NAME.replace(/\s+/g, "-")}-Resume-Creative-Technologist-Web-Architect.pdf`,
 ];
 // ───────────────────────────────────────────────────────────────────────
 
