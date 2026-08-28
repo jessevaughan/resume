@@ -424,17 +424,15 @@ section:last-child {
 }
 
 /* ---- per-track overrides ----
-   The scale above is the shared baseline. Engineering carries noticeably more
-   experience detail (14 bullets vs 11), so it retunes a few spacing tokens a
-   notch tighter to stay on one page. This is the system working as intended:
-   a variant is a re-tuning, not a rewrite. The track attribute is set on
-   <body> (see Resume.tsx), so these cascade to body padding and line-height
-   too. */
+   The scale above is the shared baseline. Engineering runs a slightly larger
+   type scale. This is the system working as intended: a variant is a
+   re-tuning, not a rewrite. The track attribute is set on <body> (see
+   Resume.tsx), so these cascade to body padding and line-height too. */
 
 body[data-track="engineering"] {
-  --gap-bullet: 4.25pt;
-  --gap-job: 9pt;
-  --gap-role: 8pt;
+  --fs-highlight: 8.5pt;
+  --fs-list: 7.75pt;
+  --fs-small: 8.5pt;
 }
 
 /* ---- print ---- */

@@ -22,7 +22,7 @@ export const resume: ResumeData = {
     // creative
     `Sixteen years across brand, web, and campaigns, the last nine-plus in creative leadership for a global SaaS marketing org. I've hired and led the creative teams on three company-wide brand transformations. That work runs on design and development I still do, from the martech stack to the website itself.`,
     // engineering
-    `Creative technologist and web architect with sixteen years building production web properties end to end, plus the tooling the teams behind them run on, across frontend, CMS architecture and migration, localization, and the infrastructure underneath. I owned AdRoll's site for twelve years and led creative for its marketing org, so the tooling I built solved problems I was also accountable for, and I can defend the technical direction to people who don't write code.`,
+    `Creative technologist and web architect with sixteen years building production web properties end to end, plus the tooling the teams behind them run on. I owned AdRoll's site and led creative for its marketing org, so I can defend the technical direction to people who don't write code.`,
   ),
 
   highlights: perTrack(
@@ -34,11 +34,10 @@ export const resume: ResumeData = {
     ],
     // engineering
     [
-      `Built a Claude Code workflow that converted hardcoded template sections into CMS-editable entries and retired a standing copy/paste ticket queue, plus AI skills carrying brand voice and standards for where AI belonged.`,
-      `Designed and built the Selectica site on ExpressionEngine in 2013, then designed OneLogin's and chose Statamic there, which is why AdRoll ran on Statamic when I rebuilt it. AdRoll's only web designer and developer until 2017.`,
+      `Built a Claude Code workflow that converted hardcoded template sections into CMS-editable entries, retiring a standing copy/paste ticket queue, plus AI skills carrying brand voice and standards for where AI belonged.`,
+      `Designed and built the Selectica site on ExpressionEngine, then designed OneLogin's and chose Statamic there. AdRoll's only web designer and developer until 2017.`,
       `Carried search and discovery through three site rebuilds, including redirect maps, canonicals, hreflang, and sitemap generation I debugged down to manual indexing submissions.`,
       `Pitched the AdRoll rebuild during a year on the growth team, then migrated the site from Drupal/Pantheon to a flat-file Statamic build in 2015–16 and cut hosting and deploy costs 80%, to $3,600 a year.`,
-      `Owned the production web stack, from provisioning and scaling through server upgrades and CI/CD.`,
     ],
   ),
 
@@ -106,13 +105,13 @@ export const resume: ResumeData = {
               `Inherited the full creative team mid-2017 when the head of creative departed, then took over direction and hiring.`,
               `Art directed photo and video shoots for campaigns and the site.`,
               `Ran localization for the site into ten locales across seven regions through Smartling.`,
-              `Directed print, swag, direct mail, and office environmental design with outside vendors.`,
+              `Directed print, swag, direct mail, and office environmental design, produced with outside vendors.`,
               `Mentored a graphic designer into web development. After the 2018 split they took the RollWorks site independently and built a UI/UX career from it.`,
             ],
             // engineering
             [
               `Kept the web build while inheriting the full creative team mid-2017.`,
-              `Led the 2019 refresh and site rebuild as Creative Director, with the page builds moved in-house onto the Statamic build. Six agency-built pages had taken about ten weeks; fourteen in-house pages took about five.`,
+              `Led the 2019 refresh and site rebuild as Creative Director, moving page builds in-house onto Statamic. Six agency-built pages had taken about ten weeks; fourteen in-house pages took about five.`,
             ],
           ),
         },
@@ -214,8 +213,11 @@ export const resume: ResumeData = {
           heading: "Brand & Creative Strategy",
           items: [
             "brand evolution",
+            "brand architecture",
             "creative direction",
             "brand systems",
+            "visual identity",
+            "brand guidelines",
             "messaging",
           ],
         },
@@ -223,8 +225,12 @@ export const resume: ResumeData = {
           heading: "Creative Leadership",
           items: [
             "team building",
+            "hiring",
+            "distributed teams",
             "mentorship",
             "creative operations",
+            "creative review & critique",
+            "vendor & production direction",
             "player-coach",
           ],
         },
@@ -234,6 +240,9 @@ export const resume: ResumeData = {
             "integrated",
             "digital & web",
             "video",
+            "documentary video",
+            "art direction",
+            "print & direct mail",
             "experiential",
             "visual storytelling",
           ],
@@ -242,8 +251,8 @@ export const resume: ResumeData = {
           heading: "Technical Fluency",
           items: [
             "design systems",
+            "information architecture",
             "CMS architecture and migration (Drupal, ExpressionEngine)",
-            "agent-facing site structure",
             "HTML/CSS/JS",
             "Figma",
             "Adobe CC",
@@ -258,11 +267,21 @@ export const resume: ResumeData = {
             "structured data",
             "Core Web Vitals",
             "AEO & LLM visibility",
+            "Search Console",
+            "Smartling",
             "HubSpot",
             "Marketo",
             "Klaviyo",
             "GA4",
             "GTM",
+          ],
+        },
+        {
+          heading: "Independent Work",
+          items: [
+            "React and TypeScript resume app, print-first PDF and DOCX builds",
+            "agent-facing structure and llms.txt, checked against live assistants",
+            "public system map and dated changelog for my AI stack",
           ],
         },
       ],
@@ -323,10 +342,10 @@ export const resume: ResumeData = {
         {
           heading: "Independent Work",
           items: [
-            "React and TypeScript resume app with print-first PDF and DOCX builds",
-            "agent-facing structure and llms.txt on my own site, checked against live assistants",
-            "public system map and dated changelog for my AI stack including what got cut",
-            "model inference and a self-hosted memory layer running on hardware at home",
+            "React and TypeScript resume app, print-first PDF and DOCX builds",
+            "agent-facing structure and llms.txt, checked against live assistants",
+            "public system map and dated changelog for my AI stack",
+            "model inference and a self-hosted memory layer on hardware at home",
           ],
         },
       ],
