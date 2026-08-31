@@ -35,8 +35,7 @@ export function MobileNotice({
         <p className="mobile-notice__role">{role}</p>
 
         <p className="mobile-notice__body">
-          This resume is laid out at US Letter, so it reads better on a wider
-          screen. The PDF works anywhere.
+          Designed for viewing on a wider screen. Download the PDF or view on a desktop to see the full resume.
         </p>
 
         {/* One track has nothing to switch between. */}
