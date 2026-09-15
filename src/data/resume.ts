@@ -64,7 +64,7 @@ export const resume: ResumeData = {
           bullets: perTrack(
             // creative
             [
-              `Directed the 2025 AdRoll and RollWorks consolidation, from the mood boards through brand architecture, messaging systems, and a full site migration. The brand guidelines became the company's source of truth.`,
+              `Directed the 2025 AdRoll and RollWorks consolidation, from mood boards through brand architecture, messaging systems, and a full site migration. The brand guidelines became the company's source of truth.`,
               `Led and hired into a distributed creative team of up to seven across the US, spanning design, web, video, and copy.`,
               `Worked with the CMO and VP of Marketing on creative direction for the org.`,
               `Built an AI-assisted workflow with Claude Code to turn hardcoded site sections into CMS-editable entries, retiring a standing copy/paste ticket queue, plus AI skills carrying brand voice and standards for where AI belonged.`,
