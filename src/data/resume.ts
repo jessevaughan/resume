@@ -64,7 +64,7 @@ export const resume: ResumeData = {
           bullets: perTrack(
             // creative
             [
-              `Directed the 2025 AdRoll and RollWorks consolidation, from mood boards through brand architecture, messaging systems, and a full site migration. The brand guidelines became the company's source of truth.`,
+              `Directed creative on the 2025 AdRoll and RollWorks consolidation, from mood boards through brand architecture, messaging systems, and a full site migration. The brand guidelines became the company's source of truth.`,
               `Led and hired into a distributed creative team of up to seven across the US, spanning design, web, video, and copy.`,
               `Worked with the CMO and VP of Marketing on creative direction for the org.`,
               `Built an AI-assisted workflow with Claude Code to turn hardcoded site sections into CMS-editable entries, retiring a standing copy/paste ticket queue, plus AI skills carrying brand voice and standards for where AI belonged.`,
@@ -72,10 +72,10 @@ export const resume: ResumeData = {
             ],
             // engineering
             [
-              `Ran adroll.com with page templates, reusable modules, and an editorial system that let marketing ship edits without engineering. Two outages in twelve years.`,
+              `Ran adroll.com with page templates, reusable modules, and an editorial system that let marketing ship edits without engineering. The site had two outages in twelve years.`,
               `Led the site migration for the 2025 AdRoll–RollWorks brand consolidation, porting RollWorks content into the existing adroll.com build and retiring rollworks.com to a redirect.`,
-              `Responded to a DDoS in 2024 alongside security and devops, scaling servers to absorb the flood before they blocked the offending IP ranges. Then built a standing bot blocklist into Fastly with the same team.`,
-              `Hired web designers and developers for day-to-day site work; kept platform ownership and my hands in the code.`,
+              `Responded to a DDoS in 2024 alongside security and devops, scaling servers to absorb the flood while devops blocked the offending IP ranges. Then built a standing bot blocklist into Fastly with the same team.`,
+              `Hired web designers and developers for day-to-day site work and kept platform ownership and my hands in the code.`,
             ],
           ),
         },
@@ -91,7 +91,7 @@ export const resume: ResumeData = {
             ],
             // engineering
             [
-              `Maintained the build and design system across three sites after the 2018 brand split.`,
+              `Maintained the AdRoll build and design system after the 2018 brand split.`,
             ],
           ),
         },
@@ -102,7 +102,7 @@ export const resume: ResumeData = {
           bullets: perTrack(
             // creative
             [
-              `Inherited the full creative team mid-2017 when the head of creative departed, then took over direction and hiring.`,
+              `Inherited the creative team mid-2017 when the head of creative departed, then took over direction and hiring.`,
               `Art directed photo and video shoots for campaigns and the site.`,
               `Ran localization for the site into ten locales across seven regions through Smartling.`,
               `Directed print, swag, direct mail, and office environmental design, produced with outside vendors.`,
@@ -110,7 +110,7 @@ export const resume: ResumeData = {
             ],
             // engineering
             [
-              `Kept the web build while inheriting the full creative team mid-2017.`,
+              `Kept the web build while inheriting the creative team mid-2017.`,
               `Led the 2019 refresh and site rebuild as Creative Director, moving page builds in-house onto Statamic. Six agency-built pages had taken about ten weeks; fourteen in-house pages took about five.`,
             ],
           ),
@@ -125,7 +125,7 @@ export const resume: ResumeData = {
           bullets: perTrack(
             [],
             [
-              "First direct report while still owning the web platform hands-on.",
+              "Took on my first direct report while still owning the web platform hands-on.",
             ],
           ),
         },
@@ -250,7 +250,6 @@ export const resume: ResumeData = {
         {
           heading: "Technical Fluency",
           items: [
-            "design systems",
             "information architecture",
             "CMS architecture and migration (Drupal, ExpressionEngine)",
             "HTML/CSS/JS",
@@ -333,7 +332,7 @@ export const resume: ResumeData = {
           heading: "Design & Creative",
           items: [
             "creative direction",
-            "design systems",
+            "brand systems",
             "Figma",
             "Adobe Creative Suite",
             "creative team leadership",
